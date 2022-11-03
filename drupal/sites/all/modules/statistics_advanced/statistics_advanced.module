@@ -1,0 +1,265 @@
+<?php
+/**
+ * @file
+ * Adds advanced settings and features for the core Statistics module.
+ */
+
+/**
+ * Implements hook_permission().
+ */
+function statistics_advanced_permission() {
+  return array(
+    'exclude visits from the access log' => array(
+      'title' => t('Exclude role from from the access log'),
+    ),
+    'exclude visits from counters' => array(
+      'title' => t('Exclude role from from the visitor counter'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_menu().
+ */
+function statistics_advanced_menu() {
+  $items['admin/config/system/statistics/default'] = array(
+    'title' => 'Settings',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'file path' => drupal_get_path('module', 'statistics'),
+  );
+  $items['admin/config/system/statistics/advanced'] = array(
+    'title' => 'Advanced settings',
+    'description' => 'Configure advanced statistics settings.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('statistics_advanced_settings_form'),
+    'access arguments' => array('administer site configuration'),
+    'weight' => 10,
+    'type' => MENU_LOCAL_TASK,
+    'file' => 'statistics_advanced.admin.inc',
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_node_view_alter().
+ *
+ * Removes the node views counter for certain node types.
+ */
+function statistics_advanced_node_view_alter(&$build) {
+  if (isset($build['links']['statistics'])) {
+    $node = $build['#node'];
+    $counter_node_types = statistics_advanced_var('counter_node_types');
+    if (isset($counter_node_types[$node->type]) && !$counter_node_types[$node->type]) {
+      unset($build['links']['statistics']);
+    }
+  }
+}
+
+/**
+ * Implements hook_boot().
+ *
+ * Checks to see if this is a unique content view by checking the 'accesslog'
+ * table for anonymous views and the 'history' table for authenticated user
+ * views.
+ *
+ * See current_path() to see why drupal_boostrap_full is needed.  Otherwise,
+ * $_GET['q'] will return an alias.
+ */
+function statistics_advanced_boot() {
+  global $user;
+
+  drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
+
+  // Drupal deletes the session if it is empty, which will break the accesslog
+  // functionality here.  Therefore, anonymous users always get something
+  // pushed into the session.
+  if (variable_get('statistics_enable_access_log', 0)) {
+    if (empty($_SESSION)) {
+      $_SESSION['statistics_advanced_keep_session'] = TRUE;
+    }
+  }
+
+  if (_statistics_advanced_is_node_visit() && statistics_advanced_var('ignore_repeat_views')) {
+    $uid = $user->uid;
+
+    if (!$uid && variable_get('statistics_enable_access_log', 0)) {
+      $query = <<<EOT
+SELECT timestamp
+FROM {accesslog}
+WHERE path = :path AND sid = :sid
+ORDER BY timestamp DESC
+EOT;
+      $timestamp = db_query_range(
+          $query,
+          0, 1,
+          array(':path' => $_GET['q'], ':sid' => session_id())
+        )->fetchField();
+
+      if ($timestamp) {
+        _statistics_advanced_ignore('nodecounter', $timestamp);
+      }
+    }
+
+    // If a user logs out, then their uid will not be set, so it won't use long
+    // term history anymore.  This is different than the D6 version.
+    if ($uid) {
+      $query = <<<EOT
+SELECT timestamp
+FROM {history}
+WHERE uid = :uid AND nid = :nid
+ORDER BY timestamp DESC
+EOT;
+      $timestamp = db_query_range(
+          $query,
+          0, 1,
+          array(':uid' => $uid, ':nid' => arg(1))
+        )->fetchField();
+
+      if ($timestamp) {
+        // Repeat user visit (same user id and node id in history table).
+        _statistics_advanced_ignore('nodecounter', $timestamp);
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_module_implements_alter().
+ *
+ * Ensures that hook_exit runs on the stats module before this module.
+ */
+function statistics_advanced_module_implements_alter(&$implementations, $hook) {
+  if ($hook == 'exit') {
+    $group = $implementations['statistics_advanced'];
+    unset($implementations['statistics_advanced']);
+    $implementations['statistics_advanced'] = $group;
+  }
+}
+
+/**
+ * Implements hook_exit().
+ *
+ * Delete unwanted records.
+ */
+function statistics_advanced_exit() {
+  global $user;
+
+  // We need user_access() here so make sure it gets loaded.
+  drupal_load('module', 'user');
+
+  if (_statistics_advanced_is_node_visit()) {
+    if (_statistics_advanced_is_403_or_404()) {
+      // Ignore 404 and 403 node visits.
+      _statistics_advanced_ignore('nodecounter', TRUE);
+    }
+    elseif (user_access('exclude visits from counters')) {
+      _statistics_advanced_ignore('nodecounter', TRUE);
+    }
+    // This is where we could compare the changed timestamp on the node with the
+    // visit time.  However, it is impossible to know if the change is
+    // significant and really should be an option that somebody might want to
+    // turn on/off.
+  }
+
+  // Check if user's access log entry should be ignored based on user role.
+  if (user_access('exclude visits from the access log')) {
+    _statistics_advanced_ignore('accesslog', TRUE);
+  }
+
+  // Check if the user's browser is a crawler.
+  if (!$user->uid && statistics_advanced_var('ignore_crawlers') && module_exists('browscap') && function_exists('browscap_get_browser')) {
+    drupal_load('module', 'browscap');
+    $browser = browscap_get_browser();
+    if (empty($browser['crawler'])) {
+      _statistics_advanced_ignore('accesslog', TRUE);
+      if (_statistics_advanced_is_node_visit()) {
+        _statistics_advanced_ignore('nodecounter', TRUE);
+      }
+    }
+  }
+
+  if (_statistics_advanced_ignore('nodecounter')) {
+    db_update('node_counter')
+      ->condition('nid', arg(1))
+      ->expression('daycount', 'daycount - 1')
+      ->expression('totalcount', 'totalcount - 1')
+      ->execute();
+  }
+
+  if (_statistics_advanced_ignore('accesslog')) {
+    db_delete('accesslog')
+      ->condition('path', truncate_utf8($_GET['q'], 255))
+      ->condition('timestamp', REQUEST_TIME)
+      ->condition('uid', $user->uid)
+      ->condition('sid', session_id())
+      ->execute();
+  }
+}
+
+/**
+ * Internal default variables for statistics_advanced_var().
+ */
+function statistics_advanced_variables() {
+  return array(
+    'statistics_advanced_ignore_crawlers' => 0,
+    'statistics_advanced_ignore_repeat_views' => 1,
+    'statistics_advanced_counter_node_types' => array(),
+    // Deleted variables set to NULL so they can still be removed if found
+    // during uninstall.
+    'statistics_advanced_ignore_user_roles' => NULL,
+    'statistics_advanced_ignore_roles' => NULL,
+  );
+}
+
+/**
+ * Internal implementation of variable_get().
+ */
+function statistics_advanced_var($name, $default = NULL) {
+  static $defaults = NULL;
+  if (!isset($defaults)) {
+    $defaults = statistics_advanced_variables();
+  }
+
+  $name = 'statistics_advanced_' . $name;
+
+  if (!isset($defaults[$name])) {
+    trigger_error(t('Default variable for %variable not found.', array('%variable' => $name)));
+  }
+
+  return variable_get($name, isset($default) || !isset($defaults[$name]) ? $default : $defaults[$name]);
+}
+
+/**
+ * Checks to see if a page is being returned as 403 or 404.
+ */
+function _statistics_advanced_is_403_or_404() {
+  // D7 requires PHP 5.2.5, so headers_list is always present as a function.
+  $headers = implode("\n", headers_list());
+
+  return preg_match('/404 Not Found|403 Forbidden/i', $headers);
+}
+
+/**
+ * Determine if this page request is a node visit (e.g. node/x).
+ */
+function _statistics_advanced_is_node_visit() {
+  static $is_node_visit;
+  if (!isset($is_node_visit)) {
+    $is_node_visit = arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == NULL && variable_get('statistics_count_content_views', 0);
+  }
+  return $is_node_visit;
+}
+
+/**
+ * Internal function to track which records to ignore.
+ */
+function _statistics_advanced_ignore($type, $value = NULL) {
+  static $ignores = array();
+  if (isset($value)) {
+    $ignores[$type] = $value;
+  }
+  else {
+    return isset($ignores[$type]) ? $ignores[$type] : FALSE;
+  }
+}

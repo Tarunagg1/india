@@ -1,0 +1,351 @@
+<?php
+/**
+* Previous / Next function for nodes, ordered by node creation date
+*
+* @param $current_node: node object or node id
+* @param $node_types:  array of node types to query
+*
+* @return array
+* 
+*/
+
+
+function custom_vzaar_video_node_presave($node) {
+if($node->type == "videos") {   
+ if($node->field_vzaar_video_url['und'][0]['value'] != ''){
+ if($node->field_vzaar_video_duration['und'][0]['value'] == ''){
+    require_once DRUPAL_ROOT . '/vzaar-src/Vzaar.php';
+    Vzaar::$token = 'SJxSbf84NUl6cJsKjCHMCMcnhF9Qvw3XpmOpD4v268';
+    Vzaar::$secret = 'Abbasali';
+    //$brightcove_video_url = $node->field_brightcove_video['und'][0]['brightcove_id'];
+    $vzaar_video_url = $node->field_vzaar_video_url['und'][0]['value'];
+    $parts = explode("/", $vzaar_video_url);
+    //print_r($parts[3]);
+    $videodetail=Vzaar::getVideoDetails($parts[3], true);
+    $vidTimeStampSecs=$videodetail->duration*1000;
+    $min = ((int)$vidTimeStampSecs/1000/60) << 0;
+    $sec = round(((int)$vidTimeStampSecs/1000) % 60);
+    $vidTimeStamp = ((strlen($min) == 1)?'0'.$min:$min) . ':' . ((strlen($sec) == 1)?'0'.$sec:$sec); 
+    
+     
+   $node->field_vzaar_video_duration['und'][0]['value'] = $vidTimeStamp;
+     }
+   } else if($node->field_embed_video['und'][0]['video_url'] != ''){
+     if($node->field_vzaar_video_duration['und'][0]['value'] == ''){
+        $youtube_video_url = $node->field_embed_video['und'][0]['video_url'];
+        preg_match("#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\/)[^&\n]+(?=\?)|(?<=embed/)[^&\n]+|(?<=v=)[^&\n]+|(?<=youtu.be/)[^&\n]+#", $youtube_video_url, $matches);
+        //$youtubeVideoId = $matches[0];
+            
+        $youtubeVideoId = explode('?', $matches[0]);
+        $youtubeVideoId = $youtubeVideoId[0];
+        
+         $ytDataUrl = 'https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id='.$youtubeVideoId.'&key=AIzaSyAiwWY-OB3DvxUm9WZAoT6MUHSyg8Le2MY';
+
+        $ch = curl_init($ytDataUrl);
+
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+        $youtubeData = curl_exec($ch);
+
+        curl_close($ch);
+
+        $youtubeDataArr = json_decode($youtubeData, 1);
+        $ytReturnedTime = $youtubeDataArr['items'][0]['contentDetails']['duration'];
+
+        /*$timeArr = explode('M', $ytReturnedTime);
+        $min = explode('PT', $timeArr[0]);
+        $min = (strlen($min[1]) == 1)?'0'.$min[1]:$min[0];
+
+        $sec = explode('S', $timeArr[1]);
+        $sec = (strlen($sec[0]) == 1)?'0'.$sec[0]:$sec[0];
+
+        $vidTimeStampyoutube = $min . ':' . $sec;*/
+        if(strstr($ytReturnedTime, 'M')){
+            $timeArr = explode('M', $ytReturnedTime);
+            $min = explode('PT', $timeArr[0]);
+            $min = (strlen($min[1]) == 1)?'0'.$min[1]:$min[1];
+
+            if(!empty($timeArr[1])){
+                $sec = explode('S', $timeArr[1]);
+                $sec = (strlen($sec[0]) == 1)?'0'.$sec[0]:$sec[0];
+            }else{
+                $sec = '00';
+            }
+
+            $vidTimeStampyoutube = $min . ':' . $sec;
+        }else{
+            $timeArr = explode('PT', $ytReturnedTime);
+
+            $min = '00';
+
+            $sec = explode('S', $timeArr[1]);
+            $sec = (strlen($sec[0]) == 1)?'0'.$sec[0]:$sec[0];
+
+            $vidTimeStampyoutube = $min . ':' . $sec;
+        }
+        //exit();
+     
+        $node->field_vzaar_video_duration['und'][0]['value'] = $vidTimeStampyoutube;
+     }
+    }    
+    
+//$node = node_submit($node); // Prepare node for a submit
+//node_save($node);
+    }
+}
+
+function custom_vzaar_video_module_implements_alter(&$implementations, $hook) {
+	if ($hook == 'node_insert') {
+		// Move custom_vzaar_video_node_insert() to the end of the list. 
+		$group = $implementations['custom_vzaar_video'];
+		unset($implementations['custom_vzaar_video']);
+		$implementations['custom_vzaar_video'] = $group;
+	}
+	
+	if ($hook == 'node_update') {
+		// Move custom_vzaar_video_node_update() to the end of the list. 
+		$group = $implementations['custom_vzaar_video'];
+		unset($implementations['custom_vzaar_video']);
+		$implementations['custom_vzaar_video'] = $group;
+	}
+}
+
+function custom_vzaar_video_node_update($node) {
+    // Provides the "updated" values
+    //print_r($node);
+    //$node->field_vzaar_video_duration['und'][0]['value'] = "7:00";
+    if($node->type == "videos") { 
+        if($node->field_vzaar_video_url['und'][0]['value'] != ''){
+
+            require_once DRUPAL_ROOT . '/vzaar-src/Vzaar.php';
+            Vzaar::$token = 'SJxSbf84NUl6cJsKjCHMCMcnhF9Qvw3XpmOpD4v268';
+            Vzaar::$secret = 'Abbasali';
+            //$brightcove_video_url = $node->field_brightcove_video['und'][0]['brightcove_id'];
+            $vzaar_video_url = $node->field_vzaar_video_url['und'][0]['value'];
+            $parts = explode("/", $vzaar_video_url);
+            //print_r($parts[3]);
+            $videodetail=Vzaar::getVideoDetails($parts[3], true);
+            $vidTimeStampSecs=$videodetail->duration*1000;
+            $min = ((int)$vidTimeStampSecs/1000/60) << 0;
+            $sec = round(((int)$vidTimeStampSecs/1000) % 60);
+            $vidTimeStamp = ((strlen($min) == 1)?'0'.$min:$min) . ':' . ((strlen($sec) == 1)?'0'.$sec:$sec); 
+
+
+            $node->field_vzaar_video_duration['und'][0]['value'] = $vidTimeStamp;
+
+        } else if($node->field_embed_video['und'][0]['video_url'] != ''){
+
+            $youtube_video_url = $node->field_embed_video['und'][0]['video_url'];
+            preg_match("#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\/)[^&\n]+(?=\?)|(?<=embed/)[^&\n]+|(?<=v=)[^&\n]+|(?<=youtu.be/)[^&\n]+#", $youtube_video_url, $matches);
+            //$youtubeVideoId = $matches[0];
+            
+            $youtubeVideoId = explode('?', $matches[0]);
+            $youtubeVideoId = $youtubeVideoId[0];
+
+            $ytDataUrl = 'https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id='.$youtubeVideoId.'&key=AIzaSyAiwWY-OB3DvxUm9WZAoT6MUHSyg8Le2MY';
+
+            $ch = curl_init($ytDataUrl);
+
+            curl_setopt($ch, CURLOPT_HEADER, 0);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+            $youtubeData = curl_exec($ch);
+
+            curl_close($ch);
+
+            $youtubeDataArr = json_decode($youtubeData, 1);
+            $ytReturnedTime = $youtubeDataArr['items'][0]['contentDetails']['duration'];
+
+            /*$timeArr = explode('M', $ytReturnedTime);
+            $min = explode('PT', $timeArr[0]);
+            $min = (strlen($min[1]) == 1)?'0'.$min[1]:$min[0];
+
+            $sec = explode('S', $timeArr[1]);
+            $sec = (strlen($sec[0]) == 1)?'0'.$sec[0]:$sec[0];
+
+            $vidTimeStampyoutube = $min . ':' . $sec;*/
+            if(strstr($ytReturnedTime, 'M')){
+                $timeArr = explode('M', $ytReturnedTime);
+                $min = explode('PT', $timeArr[0]);
+                $min = (strlen($min[1]) == 1)?'0'.$min[1]:$min[1];
+
+                if(!empty($timeArr[1])){
+                    $sec = explode('S', $timeArr[1]);
+                    $sec = (strlen($sec[0]) == 1)?'0'.$sec[0]:$sec[0];
+                }else{
+                    $sec = '00';
+                }
+
+                $vidTimeStampyoutube = $min . ':' . $sec;
+            }else{
+                $timeArr = explode('PT', $ytReturnedTime);
+
+                $min = '00';
+
+                $sec = explode('S', $timeArr[1]);
+                $sec = (strlen($sec[0]) == 1)?'0'.$sec[0]:$sec[0];
+
+                $vidTimeStampyoutube = $min . ':' . $sec;
+            }
+            //exit();
+
+            $node->field_vzaar_video_duration['und'][0]['value'] = $vidTimeStampyoutube;
+
+        }
+        
+        field_attach_update('node', $node); // to update the value of the node
+    }
+	
+	global $base_url;
+    
+    if($node->original->status == 0 && $node->status == 1){
+		if(isset($node->field_push_web_notification) && $node->field_push_web_notification['und'][0]['value'] == '1') {
+			if($node->type == "videos" || $node->type == "blogs" || $node->type == "listicles"){
+				/* $nodeUrl = $base_url . '/' . drupal_get_path_alias('node/'.$node->nid);
+				
+				drupal_set_message('Push notification works', 'status');
+				drupal_set_message($nodeUrl, 'status'); */
+				
+				if($base_url == 'https://www.101india.com'){
+				
+					$taxonomyObj = taxonomy_term_load($node->field_article_category['und'][0]['tid']);
+					$taxonomyName = $taxonomyObj->name;
+
+					//$nodeUrl = url('node/'.$node->nid, array('absolute' => true));
+					$nodeUrl = $base_url . '/' . drupal_get_path_alias('node/'.$node->nid);
+
+					$content = array(
+					  "en" => $taxonomyName . ": " . $node->title
+					  );
+
+					$con = str_replace("&amp;","&", $content);
+
+					$headings = array(
+						"en" => $node->title
+					);
+
+
+				    $fields = array(
+					  'app_id' => "bcfda9a7-06af-49b4-85fa-b077b4e15515",
+					  'included_segments' => array('All'),
+					  'data' => array("foo" => "bar"),
+					  'headings' => $headings,
+					  'contents' => $con,
+					  'url'=> $nodeUrl . "?utm_source=onesignal&utm_medium=pushnotification&utm_campaign=push"
+					);
+					
+					/* $fields = array(
+					  'app_id' => "bcfda9a7-06af-49b4-85fa-b077b4e15515",
+					  'include_player_ids' => array('2831ef84-e4a4-46ef-868d-5e9d7d232705'),
+					  'data' => array("foo" => "bar"),
+					  'headings' => $headings,
+					  'contents' => $con,
+					  'url'=> $nodeUrl . "?utm_source=onesignal&utm_medium=pushnotification&utm_campaign=push"
+					); */
+
+					$fields = json_encode($fields);
+					/*print("\nJSON sent:\n");
+					print($fields);*/
+
+					$ch = curl_init();
+					curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
+					curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json',
+										   'Authorization: Basic NzAxMmU0ZTUtOTdjOS00NWI3LTg4ODQtOWYxM2ExOTcyZWNh'));
+					curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+					curl_setopt($ch, CURLOPT_HEADER, FALSE);
+					curl_setopt($ch, CURLOPT_POST, TRUE);
+					curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+					curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+
+					$response = curl_exec($ch);
+					curl_close($ch);
+
+					//$response = sendMessage();
+					$return["allresponses"] = $response;
+					$return = json_encode( $return);
+
+					/*print("\n\nJSON received:\n");
+					print($return);
+					print("\n");*/
+				}
+			}
+		}
+	}
+}
+
+function custom_vzaar_video_node_insert($node){
+    global $base_url;
+    
+    if($node->status == 1 && (isset($node->field_push_web_notification) && $node->field_push_web_notification['und'][0]['value'] == '1')) {
+        if($node->type == "videos" || $node->type == "blogs" || $node->type == "listicles"){
+			/* $nodeUrl = $base_url . '/' . drupal_get_path_alias('node/'.$node->nid);
+			
+			drupal_set_message('Push notification works', 'status');
+			drupal_set_message($nodeUrl, 'status'); */
+			
+            if($base_url == 'https://www.101india.com'){
+            
+                $taxonomyObj = taxonomy_term_load($node->field_article_category['und'][0]['tid']);
+                $taxonomyName = $taxonomyObj->name;
+
+                //$nodeUrl = url('node/'.$node->nid, array('absolute' => true));
+                $nodeUrl = $base_url . '/' . drupal_get_path_alias('node/'.$node->nid);
+
+                $content = array(
+                  "en" => $taxonomyName . ": " . $node->title
+                  );
+
+                $con = str_replace("&amp;","&", $content);
+
+                $headings = array(
+                    "en" => $node->title
+                );
+
+
+                $fields = array(
+                  'app_id' => "bcfda9a7-06af-49b4-85fa-b077b4e15515",
+                  'included_segments' => array('All'),
+                  'data' => array("foo" => "bar"),
+                  'headings' => $headings,
+                  'contents' => $con,
+                  'url'=> $nodeUrl . "?utm_source=onesignal&utm_medium=pushnotification&utm_campaign=push"
+                );
+				
+				/* $fields = array(
+                  'app_id' => "bcfda9a7-06af-49b4-85fa-b077b4e15515",
+                  'include_player_ids' => array('2831ef84-e4a4-46ef-868d-5e9d7d232705'),
+                  'data' => array("foo" => "bar"),
+                  'headings' => $headings,
+                  'contents' => $con,
+                  'url'=> $nodeUrl . "?utm_source=onesignal&utm_medium=pushnotification&utm_campaign=push"
+                ); */
+
+                $fields = json_encode($fields);
+                /*print("\nJSON sent:\n");
+                print($fields);*/
+
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json',
+                                       'Authorization: Basic NzAxMmU0ZTUtOTdjOS00NWI3LTg4ODQtOWYxM2ExOTcyZWNh'));
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+                curl_setopt($ch, CURLOPT_HEADER, FALSE);
+                curl_setopt($ch, CURLOPT_POST, TRUE);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+
+                $response = curl_exec($ch);
+                curl_close($ch);
+
+                //$response = sendMessage();
+                $return["allresponses"] = $response;
+                $return = json_encode( $return);
+
+                /*print("\n\nJSON received:\n");
+                print($return);
+                print("\n");*/
+            }
+        }
+    }
+}

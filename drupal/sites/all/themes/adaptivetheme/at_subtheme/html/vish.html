@@ -1,0 +1,523 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Untitled Document</title>
+    <script src="../scripts/jquery-1.8.3.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/global.css">
+    <style>
+        body,
+        html {
+            height: 100%;
+            max-height: 100%
+        }
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        img {
+            max-width: 100%;
+        }
+        .clear:after {
+            visibility: hidden;
+            display: block;
+            font-size: 0;
+            content: " ";
+            clear: both;
+            height: 0;
+        }
+        body {
+            color: #1F253D;
+            font-family: "Franklin Gothic Medium", "Franklin Gothic", Arial, sans-serif;
+            font-size: 62.6%;
+            background: #dfdedc;
+            line-height: 1.35;
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            position: relative;
+            overflow-x: hidden;
+        }
+        .page {
+            position: relative;
+            height: 100%;
+        }
+        
+        .fixedPanel {
+            position: fixed;
+            top: 0;
+            width: 7%;
+            height: 100%;
+            overflow: hidden;  
+            transition: all 1s ease-in-out;
+            -webkit-transition: all 1s ease-in-out;
+            -moz-transition:    all 1s ease-in-out;
+            -o-transition:      all 1s ease-in-out;
+            -ms-transition:     all 1s ease-in-out;
+        }
+        
+        .fixedPanel.slideContent{
+            width:22.5%;
+            transition: all 0.5s ease-in-out;
+            -webkit-transition: all 0.5s ease-in-out;
+            -moz-transition:    all 0.5s ease-in-out;
+            -o-transition:      all 0.5s ease-in-out;
+            -ms-transition:     all 0.5s ease-in-out;
+        }
+        
+        .page .mainContent{
+            position: relative;
+            left: 7%;
+            width: 100%;
+            max-width: 1165px;
+        }
+        .mainContent.slideContent {
+            left: 23.3%;
+        }
+        .menuBtnWrap {
+            position: fixed;
+            top: 0;
+            width: inherit;
+            z-index: 3;
+            background: #000;
+        }
+        .menuBtnWrap .logo {
+            margin: 0.5em 0 0 0.5em;
+            width: 75px;
+            z-index: 2;
+            position: relative;
+        }
+        .menuBtnWrap .logo img {
+            max-width: 100%;
+        }
+  
+        .menu {
+            position: relative;
+            top: 0;
+            height: 100%;
+            background:#000;
+            z-index:2;
+        }
+     
+        .navWrap {
+            position: relative;
+            top: 0;
+            height:100%;
+        }
+        .expandedMenu .navWrap {
+           display:block;
+        }
+        .navWrap ul {
+            padding-top: 0;
+        }
+
+        .sideOptions.menuoptions {
+            top: 16.5em;
+            position: relative;
+            min-height: 510px;
+        }
+
+        .bottomMenu{
+            display: none;
+        }
+
+        .bottomMenu ul{
+            padding-top: 0;
+        }
+
+        .bottomMenu .tooltipText.hideHoverText{
+            width: auto;
+            left: 4.5em;
+        }
+
+        .navWrap li {
+            margin: 0 0 1.5em 0;
+        }
+
+        .mobileMenuBtn{
+            position: absolute;
+            top: 2.5em;
+            right: 3em;
+            height: 30px;
+            width: 30px;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+       .tooltipText.hideHoverText {
+            font-size: 1.8em;
+            color: #1994fc;
+            padding-top: 0;
+            text-align: left;
+            position: relative;
+            left: 3em;
+            top: -0.5em;
+            width: 10em;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+       .menu-toggle {
+            position: absolute;
+            top: 0.5em;
+            cursor: pointer;
+            width: 34px;
+            height: 33px;
+            display: none;
+            background: url(../images/close-btn.png) no-repeat;
+        }
+
+
+        .tooltip{
+            margin-left: 2.5em;
+        }
+
+        .tooltipText{
+            left: -1.7em;
+        }
+
+
+        .tooltip.menuOption1 {
+            background: url(../images/list-icon-sprite.png) 0px 0 no-repeat;
+            width: 30px;
+            height: 34px;
+        }
+
+        .menuoptions .tooltip.menuOption1.onHover:hover {
+            background: url(../images/list-icon-sprite.png) 0 0 no-repeat;
+            background-position: 98% 0px;
+        }
+
+        .tooltip.menuOption2 {
+            background: url(../images/list-icon-sprite.png) 0 -34px no-repeat;
+            height: 30px;
+            width: 31px;
+        }
+
+        .menuoptions .tooltip.menuOption2.onHover:hover{
+            background: url(../images/list-icon-sprite.png) -32px -34px no-repeat;
+        }
+
+        .tooltip.menuOption3 {
+            background: url(../images/list-icon-sprite.png) 0% 26% no-repeat;
+            height: 25px;
+            width: 31px;
+        } 
+
+        .menuoptions .tooltip.menuOption3.onHover:hover{
+            background: url(../images/list-icon-sprite.png) -31px -72px no-repeat;
+        }   
+
+        .tooltip.menuOption4 {
+            background: url(../images/list-icon-sprite.png) 0px -105px no-repeat;
+            height: 25px;
+            width: 31px;
+        }
+
+        .menuoptions .tooltip.menuOption4.onHover:hover {
+            background: url(../images/list-icon-sprite.png) -33px -105px no-repeat;
+        }
+
+        .tooltip.menuOption5 {
+            background: url(../images/list-icon-sprite.png) 0 -140px no-repeat;
+            height: 25px;
+            width: 31px;
+        }
+
+        .menuoptions .tooltip.menuOption5.onHover:hover {
+            background: url(../images/list-icon-sprite.png) -32px -140px no-repeat;
+        }
+
+        .tooltip.menuOption6 {
+            background: url(../images/list-icon-sprite.png) 0px -175px no-repeat;
+            top: 3em;
+            height: 25px;
+            width: 31px;
+        }
+
+        .menuoptions .tooltip.menuOption6.onHover:hover{
+            background: url(../images/list-icon-sprite.png) -32px -175px no-repeat;
+        }
+
+
+        @media screen and (max-width: 1024px) {
+            
+            .fixedPanel {
+                width: 9%;
+            }
+
+            .fixedPanel.slideContent {
+                transition: all 0.5s ease-in-out 0s;
+                width: 32.5%;
+            }
+                                    
+          }
+
+
+        @media screen and (max-width: 800px) {
+            
+            .fixedPanel {
+                width: 11%;
+            }
+
+            .navWrap li {
+                margin: 0 0 1em 0;
+            }
+
+            .fixedPanel.slideContent {
+                transition: all 0.5s ease-in-out 0s;
+                width: 41.5%;
+            }
+               
+                        
+          }
+
+        
+        @media screen and (max-width: 670px) {
+            .menu {
+                position: fixed;
+                z-index: 2;
+                width: 60%;
+                left: -402px;
+                transition: all 1s ease-in-out;
+                -webkit-transition: all 1s ease-in-out;
+                -moz-transition:    all 1s ease-in-out;
+                -o-transition:      all 1s ease-in-out;
+                -ms-transition:     all 1s ease-in-out;
+            }
+
+            .menuBtnWrap .logo {
+                width: 5em;
+            }
+
+
+            .logoScale img {
+                -webkit-transform: scale(1.3);
+                -moz-transform:    scale(1.3);
+                -o-transform:      scale(1.3);
+                -ms-transform:     scale(1.3);
+                -webkit-transition: all 1.3s ease-in-out;
+                -moz-transition:    all 1.3s ease-in-out;
+                -o-transition:      all 1.3s ease-in-out;
+                -ms-transition:     all 1.3s ease-in-out;
+                padding-left: 1.5em;
+            }
+
+            .menu.expandedMenu {
+                left: 0;
+                transition: all 0.8s ease-in-out;
+                -webkit-transition: all 0.8s ease-in-out;
+                -moz-transition:    all 0.8s ease-in-out;
+                -o-transition:      all 0.8s ease-in-out;
+                -ms-transition:     all 0.8s ease-in-out;
+            }
+
+            .fixedPanel{
+                width: 100%;
+            }
+            .mobileMenuBtn{
+                display: block !important;
+            }
+            .menuBtnWrap {
+                width: 100%;
+                overflow: hidden;
+            }
+            .mainContent {
+                top: 3.8em;
+                left: 0;
+                width:100%;
+            }
+            .menu.expandedMenu {
+                width: 40%;
+            }
+            
+            .fixedPanel.slideContent{
+                width:100%;
+                z-index: 2;
+            }
+            .page .mainContent.slideContent {
+                left: 40%;
+                z-index: 1;
+            }
+
+            .page .mainContent {
+                top: 7.2em;
+                left: 0;
+            }
+
+            .menuoptions .tooltip:hover span.textOnHover {
+                display: block;
+            }
+            
+            .tooltip.menuOption6{
+                top:1em;
+                left:90%;
+                display: none !important;
+            }
+
+            span.tooltipText.textOnHover {
+                font-size: 1.8em;
+                color: #1994fc;
+                padding-top: 0;
+                text-align: left;
+                /*position: relative;*/
+                left: 3em;
+                /*top: -0.5em;*/
+                width: 10em;
+                cursor: pointer;
+                display: inline-block;
+            }
+
+            .menu-toggle{
+                display: block !important;
+                background: url(../images/expanded-menu.png) no-repeat;
+            }
+
+            .menu-toggle.closeBtn{
+                 background: url(../images/close-btn.png) no-repeat;
+                 display: block !important;
+            }
+
+            .page .mainContent {
+                -webkit-transition: all 1.4s ease;
+                -moz-transition: all 1.4s ease;
+                -ms-transition: all 1.4s ease;
+                -o-transition: all 1.4s ease;
+                transition: all 1.4s ease;
+            }
+
+        }
+
+          @media screen and (max-width: 480px) {
+            
+            .menu.expandedMenu {
+                width: 62%;
+            }
+            
+          }
+
+          @media screen and (max-width: 320px) {
+            
+            .menu.expandedMenu {
+                width: 75%;
+            }
+            
+          }
+
+           
+    </style>
+    <script>
+
+
+        $(document).ready(function(){
+               
+                $('.menuOption6').on('click', function () {
+                    $(this).addClass('active');
+                    $('.mainContent').addClass('slideContent');
+                    $('.fixedPanel').addClass('slideContent');
+                    $('.menu').addClass('expandedMenu');
+                    $('.menu-toggle').fadeIn(1000);
+                    $('.tooltipText').removeClass('textOnHover').addClass('hideHoverText');
+                    $(this).hide();
+                    $('.bottomMenu').show();
+                    $('.logo').addClass('logoScale');
+                })
+
+                $('.menu-toggle').on('click',function(){
+                    $(this).fadeOut();
+                    $('.bottomMenu').hide();
+                    $('.mainContent').toggleClass('slideContent');
+                    $('.fixedPanel').toggleClass('slideContent');
+                    $('.menu').toggleClass('expandedMenu');
+                    $('.menuOption6').show();
+                    $('.tooltipText').removeClass('hideHoverText').addClass('textOnHover');
+                    
+                    $('.logo').removeClass('logoScale');
+                }); 
+
+                menuMobile();
+        })
+
+
+       function menuMobile(){
+        var winWidth = $(window).width();
+            if(winWidth < 670){
+                $('.menu-toggle').on('click',function(){
+                    $('.menu-toggle').css('display','block').toggleClass('closeBtn'); 
+                 });
+
+                
+                 
+            }
+        }
+
+      
+    </script>
+</head>
+
+<body>
+    <div class="page">
+
+        <div class="fixedPanel">
+            <div class="menuBtnWrap">
+                <div class="logo">
+                    <img src="../images/final-logo.png" alt="" />
+                </div>
+                <div class="mobileMenuBtn"><a id="menu-toggle" class="menu-toggle" href="javascript:;"></a></div>
+            </div>
+            <div class="menu">
+
+                <div class="navWrap">
+                    <div class="sideOptions menuoptions">
+                            <ul>
+                                <li>
+                                    <a class="tooltip menuOption1 onHover" href="javascript:;"><span class="tooltipText textOnHover">WET PAINT</span></a>
+                                </li>
+                                <li>
+                                    <a class="tooltip menuOption2 onHover" href="javascript:;"><span class="tooltipText textOnHover">EPIC SHIT</span></a>
+                                </li>
+                                <li><a class="tooltip menuOption3 onHover" href="javascript:;"><span class="tooltipText textOnHover">SEEN MOST</span></a>
+                                </li>
+                                <li><a class="tooltip menuOption4 onHover" href="javascript:;"><span class="tooltipText textOnHover">101s</span></a>
+                                </li>
+                                <li><a class="tooltip menuOption5 onHover" href="javascript:;"><span class="tooltipText textOnHover">SEARCH</span></a>
+                                </li>
+                                <li><a class="tooltip menuOption6 onHover" href="javascript:;"><span class="tooltipText textOnHover">More</span></a>
+                                </li>
+                            </ul>
+                                <div class="bottomMenu">
+                                    <div class="searchContent">
+                                          <input type="text" class="searchBox" size="21" maxlength="120" placeholder="SEARCH"><input type="submit" value=" " class="searchBtn">
+                                    </div>
+                                    <ul>
+                                        <li><span class="tooltipText">LOGIN</span></li>
+                                        <li><span class="tooltipText">SIGNUP</span> </li>
+                                        <li><span class="tooltipText">ABOUT US</span></li>
+                                        <li><span class="tooltipText">CONTACT</span></li>
+                                        <li><span class="tooltipText">PRIVACY POLICY</span></li>
+                                    </ul>
+                                </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+        <div class="mainContent">
+            <div class="mainContentWrap">
+                <div class="img">
+                    <img src="../images/cover-post-image.jpg" />
+                </div>
+                <div class="img">
+                    <img src="../images/cover-post-image.jpg" />
+                </div>
+                <div class="img">
+                    <img src="../images/cover-post-image.jpg" />
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

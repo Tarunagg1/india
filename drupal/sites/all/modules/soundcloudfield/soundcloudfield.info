@@ -1,0 +1,11 @@
+name = SoundCloud field
+description = Field for SoundCloud tracks and sets.
+core = 7.x
+dependencies[] = field
+package = SoundCloud
+
+; Information added by Drupal.org packaging script on 2021-10-20
+version = "7.x-1.8"
+core = "7.x"
+project = "soundcloudfield"
+datestamp = "1634714251"

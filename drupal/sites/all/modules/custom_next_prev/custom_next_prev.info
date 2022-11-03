@@ -1,0 +1,4 @@
+name = Custom Previous Next
+description = "Custom module for previous and next nodes of all content types"
+package = Experience Commerce
+core = 7.x

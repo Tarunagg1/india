@@ -1,0 +1,1602 @@
+@charset "utf-8";
+/* CSS Document */
+
+@font-face {
+    font-family: 'oswaldbold';
+    src: url('../fonts/Oswald-Bold-webfont.eot');
+    src: url('../fonts/Oswald-Bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/Oswald-Bold-webfont.woff2') format('woff2'),
+         url('../fonts/Oswald-Bold-webfont.woff') format('woff'),
+         url('../fonts/Oswald-Bold-webfont.ttf') format('truetype'),
+         url('../fonts/Oswald-Bold-webfont.svg#oswaldbold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'oswaldlight';
+    src: url('../fonts/Oswald-Light-webfont.eot');
+    src: url('../fonts/Oswald-Light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/Oswald-Light-webfont.woff2') format('woff2'),
+         url('../fonts/Oswald-Light-webfont.woff') format('woff'),
+         url('../fonts/Oswald-Light-webfont.ttf') format('truetype'),
+         url('../fonts/Oswald-Light-webfont.svg#oswaldlight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'oswaldregular';
+    src: url('../fonts/Oswald-Regular-webfont.eot');
+    src: url('../fonts/Oswald-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/Oswald-Regular-webfont.woff2') format('woff2'),
+         url('../fonts/Oswald-Regular-webfont.woff') format('woff'),
+         url('../fonts/Oswald-Regular-webfont.ttf') format('truetype'),
+         url('../fonts/Oswald-Regular-webfont.svg#oswaldregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+*{
+	margin:0;padding:0;
+}
+
+html{height:100%;
+ min-height:100%;}
+
+ a{
+ 	text-decoration: none;
+ }
+h1{
+	font-weight: normal;
+}
+
+*html .clear, :first-child+html .clear {
+    zoom: 1;
+    clear: both;
+    font-size: 1px!important;
+    line-height: 1px!important;
+}
+article, aside, figcaption, figure, footer, header, nav, section {
+    display: block;
+}
+
+body{
+	margin: 0 auto;
+	padding: 0;
+	font-size:62.5%;
+	font-family: 'Open Sans', sans-serif;
+	-webkit-font-smoothing: subpixel-antialiased;
+	line-height:1.33;
+	color: #777;
+	min-height:100%;
+	overflow-x: hidden;
+	-webkit-font-smoothing: antialiased;
+}
+img{
+	border: 0;
+	outline: none;
+	vertical-align: middle;	
+    max-width: 100%;
+}
+
+.toLeft{float:left;}
+.toRight{float:right;}
+.clear{
+	clear:both;
+	display:block;
+	height:0;
+	font-size:0;
+	visibility:hidden;	
+}
+
+ul:after, .clear:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+
+:focus {
+outline: 0;
+}
+h2 , h3{
+	font-weight: normal;
+}
+
+#admin-menu ul:after{
+   display:inline;
+}
+
+.page{
+  max-width: 1280px;
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+  position: relative;
+}
+
+.homePg, .searchList{
+  min-height: 100%;
+  background: url(../images/home-bg.jpg) top center repeat;
+}
+
+.containerwrap {
+  display: block;
+  float:left;
+  width:82.2%;
+  border: 1px solid #747272;
+  border-bottom:0;
+  box-sizing:border-box;
+  /*overflow: hidden;*/
+}
+
+/* Header and Menu CSS starts here */
+
+
+.headerwrap {
+  overflow: hidden;
+  width: 100%;
+}
+
+.menuWrap{
+	background: #fff;
+	  border-bottom: 1px solid;
+}
+
+.logoImg, .logoWrap img {
+  margin: 0 auto;
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+.logoWrap .logoImg, .logoWrap img, .logoWrap .logoTxt{
+  text-align: center;
+  display: block;
+}
+
+.mobileSiteLogo{
+  display: none;
+}
+
+.logoTxt{
+  font-family: 'oswaldregular';
+  font-size: 1.3em;
+  text-transform: uppercase;
+  color: #000;
+}
+
+.navToggle{
+  display: none;
+}
+
+.menuList {
+  /*float: left;*/
+}
+
+.socialIconWrap {
+	float: left;
+	width:28.4%;
+}
+
+.menuItems {
+  float: left;
+  width: 11.5%;
+}
+
+.menuItems.loveSex{
+	width: 13%;
+}
+
+.menuItems.travelFood{
+	width: 17%;
+}
+
+.menuItems.brief{
+	width: 12%;
+}
+
+.dropdown-content li {
+  font-family: 'oswaldregular';
+  font-size: 1.3em;
+  border-bottom: 1px solid #D1D0D0;
+}
+
+.dropdown-content li a{
+	color:#9a9898;
+	display:block;
+	padding: 1em;
+}
+
+.menuLink {
+  font-size: 1.2em;
+  color: #010101;
+  font-family: 'oswaldbold';
+  padding: 1em 0em;
+  text-align:center;
+  display: block;
+  border-right: 1px solid #747272;
+}
+
+nav{
+  float: left;
+  width:71.6%;
+}
+
+.menuList ul .about{
+	display:none;
+}
+
+.menuLink1:active, .menuLink1:hover, .categoryVal.funny {
+  background: #b2b935;
+    color: #fff;
+}
+
+.menuLink2:active, .menuLink2:hover, .categoryVal.loveSex {
+  background: #7f1231;
+    color: #fff;
+}
+
+.menuLink3:active, .menuLink3:hover, .categoryVal.people {
+  background: #4288cd;
+    color: #fff;
+}
+
+.menuLink4:active, .menuLink4:hover, .categoryVal.travelFood {
+  background: #6d7043;
+    color: #fff;
+}
+
+.menuLink5:active, .menuLink5:hover, .categoryVal.fiction {
+  background: #853376;
+    color: #fff;
+}
+
+.menuLink6:active, .menuLink6:hover, .categoryVal.music {
+  background: #ffa024;
+    color: #fff;
+}
+
+.menuLink7:active, .menuLink7:hover {
+  background: #00945f;
+    color: #fff;
+}
+
+.menuLink8:active, .menuLink8:hover {
+  background: #b78250;
+    color: #fff;
+}
+
+.socialIconWrap li{
+  float: left;
+  margin: 0;
+  width:14%;
+}
+
+.socialIconWrap .icons {
+  padding: 1em 0.8em;
+  display: block;
+  text-align: center;
+}
+
+.socialIconWrap .icons.searchIcon{
+  padding: 1em 1em 1em 1em;
+}
+
+.mobileViewHeader .searchArea {
+  display: none;
+}
+
+.search.hide{
+  display: none;
+}
+
+.mdi-action-search, .searchCross{
+	font-size: 1.5rem;
+	color: #000;
+	display: block;
+	font-weight: bold;
+	line-height: 0.6;
+	width: 27px;
+	padding: 0.1em 0;
+}
+
+.searchCross.show{
+  display: block !important;
+  position: relative;
+  z-index: 2;
+}
+
+.searchArea{
+  position: relative;
+  /*background: #dfdede;*/
+}
+
+.socialIconWrap .icons.searchIcon {
+  padding: 1em 1em 1em 1em;
+  z-index: 20;
+  position: relative;
+}
+
+.searchArea input {
+ position: absolute;  
+ font-family: 'oswaldbold';
+ border: 0;
+  background: #dfdede;
+ color: #000;  
+ right: 0.7em;
+ top: 0.4em;
+ font-size: 1.4em;
+ height: 1.25em;
+ z-index: 1;
+ width: 0em;
+ border-bottom: 1px solid #a3a3a3;
+ padding: 0.3em 0;
+}
+
+.searchArea input[type=text]:focus {
+   border-bottom: 0 !important;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow:none;
+}
+
+.searchArea .searchInput {
+  position: absolute;
+  background: #dfdede;
+  top: 0;
+  right: 0;
+  width: 0;
+  min-height: 100%;
+}
+
+.searchInput{
+   -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  -ms-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.searchInput.widthInput{
+ width: 21.5em;
+ z-index: 1;
+ padding: 0.3em;
+   -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  -ms-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.searchArea .txtBox.widthInput{
+ width: 14em;
+ padding: 0.3em;
+}
+
+nav a.button-collapse{
+	display:none;
+}
+
+/* Header and Menu CSS ends here */
+
+
+/* Home Page Content CSS starts here */
+
+.contentWrap{
+  background: #fff;
+  box-sizing:border-box;
+}
+
+.contentWrap li{
+  list-style: none;
+}
+
+.colRhs {
+  float: right;
+}
+
+.colLhs, .colRhs {
+  width: 8.6%;
+  float:left;
+}
+
+.whatsNewWrap .summary {
+  background: #000;
+  min-height: 126px;
+  padding: 1em;
+}
+
+.whatsNewWrap .dataContainer .summary h2 {
+  color: #fff;
+  padding: 0.3em 0 0.3em 0;
+  font-family: 'oswaldregular';
+  font-size: 1.7em;
+}
+
+.whatsNewWrap .dataContainer .summary h2 a{
+	color: #fff;
+}
+
+.whatsNewWrap .dataContainer .summary p {
+  color: #fff;
+  font-weight: normal;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 1.3em;
+}
+
+.pageBanner {
+  position: relative;
+  padding: 0 0 1.5em 0;
+}
+
+.pageBanner .bannerImg{
+	margin:0 auto;
+	text-align:center;
+	display: block;
+}
+
+.pageBanner .dataContainer {
+  position: absolute;
+  z-index: 2;
+  bottom: 4.5em;
+}
+
+.pageBanner .dataContainer .summary h2, .pageBanner .dataContainer .summary h2 a {
+  line-height: 1.6;
+  color: #fff;
+  padding: 0em 0 0.5em 0;
+  font-family: 'oswaldregular';
+}
+
+.pageBanner .metaDate{
+  display: none;
+}
+
+.pageBanner .dataContainer .summary p {
+  font-size: 1.3em;
+  line-height: 1.5;
+  color: #fff;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.pageBanner .summary {
+  background: #000;
+  padding: 1.5em;
+  min-width: 39em;
+  max-width: 100%;
+}
+
+.iconWrap .bigPlay{
+	background:url(../images/icon-sprite.png) no-repeat;
+	height: 54px;
+	width: 61px;
+	position: relative;
+	display: block;
+	background-position: -65px 1px;
+	z-index: 2;
+}
+
+.iconWrap .play{
+	background:url(../images/icon-sprite.png) no-repeat;
+	height: 18px;
+	width: 19px;
+	position: relative;
+	display: block;
+	background-position: -42px -17px;
+	z-index: 2;
+}
+
+.iconWrap .read{
+	background:url(../images/icon-sprite.png) no-repeat;
+	height: 18px;
+	width: 23px;
+	position: relative;
+	display: block;
+	background-position: 4px -17px;
+	z-index: 2;
+}
+
+.pageBanner .iconWrap img {
+  width: auto;
+}
+
+.pageBanner .iconWrap span{
+  /*display: none;*/
+}
+
+.whatsNew, .whatsHot {
+  margin-bottom: 0.3em;
+}
+
+.whatsNewWrap li{
+  width: 49.7%;
+  float: left;
+  padding-bottom: 99999px;
+  margin-bottom: -99999px;
+}
+
+.whatsNewWrap li:last-child{
+	float:right;
+}
+
+
+.whatsNewWrap li:nth-child(1){
+  margin-right: 0.3em;
+}
+
+.titleTxt{
+  font-family: 'oswaldregular';
+  font-size: 1.8em;
+  padding: 0.3em 0;
+  color: #fff;
+  display: block;
+  text-align: center;
+}
+
+.whatsNew .titleTxt{
+  background: #5fcfb6;
+}
+
+.whatsHot .titleTxt{
+  background: #363dd4;
+}
+
+.whatsNewWrap {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Masonry CSS starts here */
+
+.listContent{
+  position: relative;
+}
+
+.masonryContent {
+    margin: 0.5em auto;
+}
+
+.item {
+  width: 30.5%;
+  padding: 1em 1em 1em 1em;
+  min-height:350px;
+}
+
+/*.item .imgpost{
+  width: 254px;
+}*/
+
+.dataContainer{
+  position:relative;
+}
+
+.metaDate {
+  display: block;
+  font-size: 1em;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  color: #979595;
+  line-height: 2;
+  text-align:left;
+}
+
+.categoryVal {
+  position: absolute;
+  right: 0em;
+  top: -2em;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  padding: 0.35em;
+  color:#fff;
+  text-transform:uppercase;
+}
+
+.art .categoryVal{
+	background:#E8947C;
+}
+
+.music .categoryVal{
+  background: #ffa024;
+    color: #fff;
+}
+
+.entertainment .categoryVal{
+	background:#DAC8C2;
+}
+
+.fashion .categoryVal{
+	background:#4EA19E;
+}
+
+.specials .categoryVal{
+	background:#0CF26F;
+}
+
+.sports .categoryVal{
+	background:#9C7FAD;
+}
+
+.funny .categoryVal{
+  background:#b2b935;
+}
+
+.loveSex .categoryVal{
+  background:#7f1231;
+}
+
+.travelFood .categoryVal{
+  background:#6d7043;
+}
+
+.people .categoryVal{
+  background:#4288cd;
+}
+
+.imageContent{
+	position:relative;
+	text-align: center;
+}
+
+.iconWrap{
+  position: absolute;
+  bottom: 1em;
+  left: 1em;
+}
+
+.iconWrap img.play{
+  top: 0.1em;
+  z-index: 1;
+  width: 35%;
+  position: relative;
+}
+
+.iconWrap span.time {
+	background: #bcbaba;
+	position: absolute;
+	left: 1.3em;
+	padding: 0.1em 0.7em 0em 0.7em;
+	top: 0.3em;
+	z-index: 0;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-weight: bold;
+	color: #000000;
+}
+
+.dataContainer .summary h2 {
+  font-size: 1.9em;
+  line-height: 1.2;
+  color: #000;
+  padding: 1em 0 1em 0;
+  font-family: 'oswaldregular';
+}
+
+.dataContainer .summary h2 a{
+	color: #000;
+}
+
+.dataContainer .summary p {
+  font-size: 1.2em;
+  line-height: 1.5;
+  color: #000;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* Masonry CSS ends here */
+
+/* Series Landing CSS starts here */
+
+.series {
+  padding-bottom: 0.5em;
+}
+
+.seriesLanding{
+  min-height: 100%;
+  background: url(../images/series-pattern.jpg) top center repeat;
+}
+
+.series .dataContainer {
+	top: 18em;
+	margin: 0 auto;
+	text-align: center;
+	width: 100%;
+}
+
+.series .dataContainer .summary h2 {
+	font-size: 5.2em;
+	padding: 0;
+	line-height: 1.2;
+	text-shadow: 1px 1px 1px rgba(43, 42, 42, 1);
+}
+
+.series .summary {
+	background: none;
+	width: auto;
+	text-align: center;
+}
+
+.series .dataContainer .summary p {
+	font-size: 1.95em;
+	line-height: 1;
+	text-shadow: 1px 1px 1px rgba(43, 42, 42, 1);
+}
+
+/* Breadcrumbs CSS starts here */
+
+.breadCrumbs{
+	padding: 0em 0em 0em 1em;
+	display: block;
+	overflow: hidden;
+}
+
+.breadCrumbs ul li{
+	float:left;
+}
+
+.breadCrumbs ul li span{
+	padding:0 0.3em 0 0.3em;
+}
+
+.breadCrumbs ul li a{
+	font-family: 'oswaldbold';
+	font-size:1.3em;
+	color:#a3a3a3;
+	text-transform:uppercase;
+}
+
+/* Breadcrumbs CSS starts here */
+
+/* Series landing CSS ends here */
+
+/* Article Listing CSS starts here */
+
+.articleContent {
+  padding: 1em;
+}
+
+.articleContent .lhsContent{
+	float:left;
+	width:77%;
+  position: relative;
+}
+
+.articleContent .colRhs{
+	float:left;
+}
+
+.articleContent .metaDate{
+	display: block;
+	font-family: 'oswaldregular';
+	color: #000;
+	line-height: 1;
+	font-size: 1.2em;
+}
+
+.articleContent .articleSummary h2 a{
+	font-family: 'oswaldregular';
+	color:#000;
+	font-size:1.8em;
+}
+
+.articleContent .articleSummary p{
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 1.7em;
+	color: #000;
+	line-height: 1.5;
+	padding: 1em 0 0 0;
+}
+
+.articleContent .breadCrumbs{
+	padding:0;
+}
+
+.articleSummary {
+  padding: 1em 1em 5em 0;
+}
+
+.articleContent .articleWrap h3{
+	font-family: 'oswaldbold';
+	color:#000;
+	font-size:2em;
+}
+
+.articleContent .articleWrap p{
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size:1.2em;
+	color:#000;
+	padding: 0.5em 0;
+	line-height: 1.5;
+}
+
+.articleContent .articleWrap .source{
+	font-family: 'oswaldregular';
+	color:#898686;
+	padding: 0.5em 0;
+	font-size: 1.1em;
+}
+
+.articleWrap li {
+  padding: 0 0 1em 0;
+}
+
+.rhsContent{
+  position: relative;
+	float: right;
+	width: 23%;
+}
+
+.rhsContent .socialContent{
+  padding-bottom: 6em;
+}
+
+.rhsContent .socialContent ul li {
+  float: left;
+  padding: 0 0.2em 0 1.4em;
+}
+
+.rhsContent .socialContent ul li:first-child, .rhsContent .socialContent ul li:last-child{
+	  padding: 0 0.2em 0 0.8em;
+}
+
+.rhsContent .socialContent ul li a .mdi-content-add-circle{
+	color:#000;
+	font-size: 2em;
+	padding: 0.3em 0 0 0.2em;
+	display: block;
+}
+
+.rhsContent .socialContent .viewCount{
+	font-family:'oswaldregular';
+	color:#000;
+	text-align: center;
+	font-size: 1.5em;
+	padding: 0.5em 0 0 0;
+}
+
+.rhsContent .socialIconsContainer{
+	border-bottom: 2px dotted #a8aaad;
+	padding: 0 0 1em 0;
+  position: relative;
+}
+
+.popularSection {
+  position: relative;
+  /*top: 5em;*/
+}
+
+.popularSection .popTitle{
+  font-size: 1.8em;
+  background: #000000;
+  margin-bottom: 0.5em;
+  color: #fff;
+  text-align: center;
+  font-family:'oswaldregular';
+}
+
+.popularItems {
+  margin-bottom: 1em;
+}
+
+.pageBanner .popularSection .dataContainer {
+  position: relative;
+  z-index: 2;
+  bottom: 0;
+}
+
+.pageBanner .popularSection .summary {
+  background: none;
+  padding: 0.5em;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.pageBanner .popularSection .dataContainer .summary h2{
+  color: #000;
+  font-size: 1.3em;
+}
+
+.popularSection .categoryVal, .popularSection .metaDate{
+  display: none;
+}
+
+.popularSection .iconWrap {
+  position: absolute;
+  bottom: 1em;
+  left: 0em;
+}
+
+.socialHidden {
+  background: #fff;
+  z-index: 22;
+  width: 90%;
+  left: 0;
+  margin: 0 auto;
+  right: 0;
+  top: 6em;
+  position: absolute;
+  padding: 0.5em;
+  border-radius: 0.5em;
+  -webkit-box-shadow: -2px -2px 9px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: -2px -2px 9px 0px rgba(0,0,0,0.75);
+  box-shadow: -2px -2px 9px 0px rgba(0,0,0,0.75);
+}
+
+.shareTxt .share {
+  float: left;
+  color: #000;
+  font-family:'oswaldregular';
+}
+
+.mdi-navigation-cancel {
+  color: #000;
+  font-size: 1.8em;
+  float: right;
+}
+
+.rhsContent .socialContent .socialHidden ul li {
+    padding: 0 0.2em 0 0.7em;
+  margin-bottom: 0.7em;
+}
+
+.rhsContent .socialContent .socialHidden ul li:last-child {
+  margin-top: 0.3em;
+  margin-bottom: 0;
+  display: block;
+  text-align: center;
+  float: none;
+}
+
+/* Article Listing CSS starts here */
+
+
+/* Footer CSS starts here */
+
+footer{
+  background:#000000;
+  position:relative;
+  z-index:5;
+}
+
+.footerContent{
+  padding: 1em 0 1em 0;
+  text-align:center;
+  margin: 0 auto;
+}
+
+footer ul li {
+  text-decoration:none;
+  text-transform:uppercase;
+  font-family: 'oswaldbold';
+  font-size: 1.2em;
+  list-style: none;
+  display: inline-block;
+  padding: 0 1.3em;
+  border-left: 2px solid;
+}
+
+footer ul li a{
+  color:#727171;
+}
+
+footer ul li:last-child{
+  border-right: 2px solid;
+}
+
+
+/* Footer CSS ends here */
+
+.loader{
+	background:url(../images/load-more.png) no-repeat;
+	height: 60px;
+	margin: 0 auto;
+	width: 48px;
+	background-size: contain;
+	padding: 1em 0;
+	cursor:pointer;
+}
+
+/* Search Lists CSS starts here */
+
+.searchList .pageBanner{
+	padding-bottom:0;
+}
+
+.searchBox input{
+	background: url(../images/search-big.png) no-repeat 2% center;
+	margin: 0;
+	padding: 0 0 0 2em;
+	font-family: 'oswaldregular';
+	color:#000000;
+	text-transform:uppercase;
+	font-size: 3em;
+	width: 93%;
+}
+
+.contentSortWrap {
+  padding: 0 0 10em 0;
+}
+
+.searchContentType {
+	padding: 1em;
+	float: left;
+}
+
+.searchRelevanceType{
+	float: right;
+	padding: 1em 0.5em 1em 0;
+}
+
+.searchContentType li, .searchRelevanceType li {
+	float: left;
+	padding: 0 2em 0 0;
+	font-family: 'oswaldbold';
+	color: #000;
+	font-size: 1.5em;
+}
+
+.searchRelevanceType li {
+	padding: 0 1em 0 0;
+}
+
+.searchContentType li:first-child{
+	padding: 0 1em 0 0;
+	line-height: 2.3;
+}
+
+.searchContentType li label {
+	text-transform:uppercase;
+	line-height: 2.7 !important;
+	color: #000;
+}
+
+#views_infinite_scroll-ajax-loader{
+	padding:1em 0 2em 0;
+}
+
+/* Search Lists CSS ends here */
+
+
+/* Media Queries Start here */
+
+/*@media only screen and (max-width : 1024px) {
+.menuList ul li.about{
+	display:none;
+}
+
+.menuList ul .other{
+	display:block;
+}
+}
+
+@media all and (max-width:992px){
+.menuLink {
+  padding:1.2em 1.2em;
+}
+
+.socialIconWrap {
+	padding: 0 1.3em;
+}
+
+.item {
+  width: 30%;
+}
+
+}*/
+
+
+@media all and (max-width:991px){
+nav a.button-collapse{
+	display:block;
+}
+.menuList ul .other{
+	display:none;
+}
+
+.menuList ul li.about{
+	display:block;
+	height: 100%;
+}
+
+.contentWrap{
+  position: relative;
+  /*z-index: 5;m- change
+  top:-0.2em;m- change*/
+  width: 100%;
+}
+
+.mobileViewHeader {
+  display: inline-block;
+  width: 100%;
+  position: fixed;
+  z-index: 200;
+  padding: 0 0 1em 0;
+  background: #fff;
+  top: 0;
+}
+
+.contentWrap.contentSlide.slideDiv{
+  /*left: 27em; m- change*/
+  /*top:-0.2em; m- change */
+  transition: all 1.2s ease;
+  -webkit-transition: all 0.8s ease;
+  -moz-transition: all 0.8s ease;
+  -o-transition: all 0.8s ease;
+  -ms-transition: all 0.8s ease;
+}
+
+.contentWrap.contentSlide{
+  position: relative;
+  /*z-index: 5;m- change
+  left:0;m- change*/
+  transition: all 0.8s ease;
+  -webkit-transition: all 0.8s ease;
+  -moz-transition: all 0.8s ease;
+  -o-transition: all 0.8s ease;
+  -ms-transition: all 0.8s ease;
+}
+
+header {
+  z-index: 1;
+  min-height: 100%;
+}
+
+.menuList {
+  display: block;
+  width: 70%;
+}
+
+.pageBanner {
+  padding: 6.5em 0 1.5em 0;
+}
+
+.menuItems li {
+  width: 100%;
+}
+
+.mobileViewHeader .searchArea {
+  display: block;
+}
+
+.whatsNewWrap li {
+  width: 100%;
+  float: none;
+}
+
+.whatsNewWrap  {
+  width: 97%;
+  border: 1px solid #8e8e8d;
+  margin: 0 auto;
+}
+
+.masonryContent {
+  margin: 0em auto;
+}
+
+.listContent{
+  margin: 0 auto;
+  overflow: hidden;
+  width: 97%;
+  border-left: 1px solid #8e8e8d;
+  border-right: 1px solid #8e8e8d;
+  border-bottom: 1px solid #8e8e8d;
+}
+
+.seriesLanding .series{
+	padding-bottom:0;
+}
+
+.seriesLanding .masonryContent{
+	  padding: 1.5em 0 0em 0;
+}
+
+.seriesLanding .series .dataContainer .summary p{
+	display:none;
+}
+
+/*cross btn CSS for closing slide*/
+
+.logoWrap.colLhs, .colRhs{
+  display: none;
+}
+
+.mobileSiteLogo{
+	display: block;
+	float: left;
+	position: relative;
+	left: 8em;
+	width: 31%;
+	top: 0.7em;
+}
+
+.mdi-action-search, .searchCross{
+  color: #999999;
+  font-size: 4em;
+}
+
+.searchArea {
+  position: relative;
+  top: 1em;
+  right: 2em;
+  float: right;
+  width: 35%;
+}
+
+
+.searchArea .searchInput {
+  height: 3.7em;
+  top: 0.5em;
+}
+
+.searchArea input {
+  /*width: 100%;*/
+  top:0.45em;
+  /*min-width: 15em;*/
+}
+
+.icons.searchIcon {
+  position: absolute;
+  right: 1em;
+  top: 1em;
+}
+
+.navToggle{
+  display: block;
+}
+
+#nav-toggle {
+  position: absolute;
+  left: 1.5em;
+  top: 2.5em;
+  z-index: 19;
+  cursor: pointer;
+  padding: 10px 35px 5px 0px;
+}
+
+#nav-toggle span, #nav-toggle span:before, #nav-toggle span:after {
+    cursor: pointer;
+    border-radius: 1px;
+    height: 5px;
+    width: 35px;
+    background: #f7236d;
+    position: absolute;
+    display: block;
+    content: '';
+    transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition:    all 0.4s ease-in-out;
+    -o-transition:      all 0.4s ease-in-out;
+    -ms-transition:     all 0.4s ease-in-out;
+}
+#nav-toggle span:before {
+  top: -10px; 
+}
+#nav-toggle span:after {
+  bottom: -10px;
+}
+
+#nav-toggle.active span {
+  background-color: transparent;
+}
+#nav-toggle.active span:before, #nav-toggle.active span:after {
+  top: 0;
+}
+#nav-toggle.active span:before {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+}
+#nav-toggle.active span:after {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+}
+
+.socialIconWrap{
+  display: none;
+}
+
+.containerwrap {
+  width: 100%;
+}
+
+.menuItems {
+  float: none;
+  width:100%;
+}
+
+.menuLink {
+  font-size: 2em;
+  padding: 0.6em 3em;
+  border-right: 0;
+   font-family: 'oswaldregular';
+  border-bottom: 1px solid #bebebe;
+  border-top: 1px solid #bebebe;
+  margin-bottom: 0.1em;
+  width:140px;
+}
+
+.masonryContent {
+  width:100%;
+}
+
+.item {
+  max-width: 100%;
+  margin: 0 auto;
+  width: 100%;
+  border-bottom: 1px solid #8e8e8d;
+  min-height: 180px;
+}
+
+.imageContent {
+  float: none;
+  margin: 0 auto;
+}
+.item .imageContent {
+  float: left;
+  width: 34%;
+  margin: 0 auto;
+}
+.summary {
+  float: none;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1em;
+}
+
+.item .summary {
+  float: left;
+  width: 50%;
+  padding: 0em 1em 0em 1em;
+}
+
+.item .dataContainer .summary h2 {
+  padding: 0.1em 0 0.3em 0;
+}
+
+.detailLink {
+  display: block;
+}
+
+.detailLink img{
+  display: block;
+  text-align: center;
+  margin: 0 auto;
+}
+  
+.dataContainer .summary h2 {
+  /*font-size: 2.3em;*/
+  font-weight: normal;
+}
+
+.whatsNewWrap .summary {
+  background: #fff;
+  min-height: inherit;
+}
+
+.whatsNewWrap .dataContainer .summary h2 {
+  color: #000;
+ /* font-size: 3.2em;*/
+}
+
+.whatsNewWrap .summary .metaDate {
+  color: #9d9c9c;
+  /*font-size: 1.8em;*/
+   font-family: 'oswaldregular';
+}
+
+.whatsNewWrap .dataContainer .summary p {
+  color: #000;
+  font-size: 1.8em;
+}
+
+.homePg .pageBanner .summary {
+  background: #e3e3e3;
+  padding: 1.5em;
+  width: auto;
+  min-width: 31em;
+}
+
+.homePg .pageBanner .dataContainer .summary h2 {
+  /*font-size: 4.5em;*/
+  line-height: 1.4;
+  color: #010101;
+}
+
+.homePg .pageBanner .dataContainer .summary h2 a, .whatsNewWrap .dataContainer .summary h2 a{
+  color: #010101;
+}
+
+.homePg .pageBanner .dataContainer .summary p {
+  font-size: 2em;
+  line-height: 1.5;
+  color: #010101;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.homePg .pageBanner .dataContainer {
+	background: #e3e3e3;
+  position: relative;
+  z-index: 2;
+  bottom: 0;
+}
+
+.homePg .pageBanner .imageContent {
+  float: left;
+  width: 55%;
+  margin: 0 auto;
+  position: relative;
+  left: 2em;
+  bottom: 2em;
+}
+
+p {
+  font-size: 1em;
+  line-height: 1.5;
+  color: #000;
+}
+
+.footerContent {
+  width: 90%;
+}
+
+footer ul li {
+  padding: 0 1em;
+}
+
+footer ul li a {
+  font-size: 1em;
+}
+
+ /* Collapsible Menu CSS starts here */
+
+
+.collapsible li .collapsible-header{
+       background:url(../images/active-collapse.png) no-repeat 97% center;
+}
+
+.collapsible li.active .collapsible-header{
+       background:url(../images/active-expand.png) no-repeat 97% center;
+}
+
+.collapsible-body ul li{
+       font-family: 'oswaldregular';
+       padding: 0.5em 0em 0.5em 0em !important;
+       font-size: 1.8em;
+}
+
+.collapsible-body ul li a{
+       color: #9a9898;
+	   padding:0 0.5em 0 1.7em;
+}
+
+.collapsible li .collapsible-header, .menuLink9:active, .menuLink9:hover {
+ background:url(../images/active-collapse.png) no-repeat 97% center;
+}
+
+.collapsible li.active .collapsible-header, .collapsible li.active .collapsible-header .menuLink9:active, .collapsible li.active .collapsible-header .menuLink9:hover {
+       background:url(../images/active-expand.png) no-repeat 97% center #b78250;
+}
+
+/* Collapsible Menu CSS ends here */
+
+/* Series landing CSS starts here */
+
+
+
+}
+
+
+@media only screen and (max-width : 670px) {
+.loader{
+	  margin: 0.5em auto 0 auto;
+}
+footer ul li a {
+  font-size: 0.8em;
+}
+
+.pageBanner .dataContainer .summary h2 {
+  /*font-size: 2em;*/
+}
+
+.searchArea input {
+  /*min-width: 13em;*/
+  top:0.8em;
+}
+
+.pageBanner {
+  padding: 7em 0 1.5em 0;
+}
+
+.whatsNew .dataContainer {
+  padding: 1em;
+}
+
+.titleTxt {
+  margin: 0.5em 0;
+  padding: 0.1em 0;
+}
+
+.pageBanner .summary {
+  min-width: initial;
+}
+
+.dataContainer .summary h2 {
+  padding: 0em 0 0.5em 0;
+}
+
+.categoryVal{
+	/*bottom: -2em;
+	top: initial;
+	right: inherit;
+	left: 0;*/
+}
+
+.seriesLanding .series .dataContainer {
+	top: 7em;
+}
+
+.seriesLanding .pageBanner .dataContainer .summary h2 {
+  font-size: 2.8em;
+}
+
+.dataContainer .summary p {
+	display:none;
+}
+
+.listContent{
+	border-bottom:none;
+}
+
+.icons.searchIcon {
+  padding: 0.3em 0.3em 1em 1em;
+}
+
+.item{
+	/*min-height: 200px;*/
+}
+
+.breadCrumbs {
+  padding: 1em 0em 0em 1em;
+}
+
+.footerContent {
+  width: 95%;
+}
+
+footer ul li:last-child {
+  border-right: none;
+}
+
+}
+
+
+@media only screen and (max-width : 480px) {
+.item {
+  max-width: 100%;
+  margin: 0 0 0em 0;
+  min-height:130px;
+}
+
+footer ul li {
+  padding: 0 1em;
+  float: none;
+  margin: 0.5em 0;
+}
+
+.footerContent {
+  padding: 1em 0 1em 0;
+}
+
+footer ul li a, footer ul li {
+  font-size: 0.8em;
+  line-height: 1.5;
+}
+}

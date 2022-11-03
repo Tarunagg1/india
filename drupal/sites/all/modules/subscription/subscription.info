@@ -1,0 +1,4 @@
+name = Subscription Module
+description = "To save the subscription entries in the content type"
+package = Experience Commerce
+core = 7.x

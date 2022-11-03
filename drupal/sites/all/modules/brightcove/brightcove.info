@@ -1,0 +1,18 @@
+name = Brightcove
+description = Brightcove integration module - basic API
+core = 7.x
+
+configure = admin/config/media/brightcove
+
+dependencies[] = ctools
+
+files[] = brightcove.module
+files[] = brightcove.admin.inc
+
+
+; Information added by Drupal.org packaging script on 2014-06-02
+version = "7.x-5.1"
+core = "7.x"
+project = "brightcove"
+datestamp = "1401715730"
+

@@ -1,0 +1,31 @@
+<?php
+/**
+ * @file
+ * Install and uninstall schema and functions for the statistics_advanced module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function statistics_advanced_install() {
+  db_add_index('accesslog', 'accesslog_path_sid', array('path', 'sid'));
+  db_add_index('accesslog', 'accesslog_uid_sid', array('uid', 'sid'));
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function statistics_advanced_uninstall() {
+  // Remove module variables
+  drupal_load('module', 'statistics_advanced');
+  $variables = array_keys(statistics_advanced_variables());
+  foreach ($variables as $variable) {
+    variable_del($variable);
+  }
+
+  // Remove index created on accesslog table
+  db_drop_index('accesslog', 'accesslog_path_sid');
+  db_drop_index('accesslog', 'accesslog_uid_sid');
+}
+
+// TODO - missing upgrade path from Drupal 6

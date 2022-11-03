@@ -1,0 +1,447 @@
+<?php
+/**
+ * Implements hook_menu()
+**/
+function custom_next_prev_menu(){
+    $items['load-more/hp-load-more'] = array(
+		'page callback' => 'hp_load_more',
+		'type' => MENU_CALLBACK,
+		'page arguments' => array(),
+		'access arguments' =>  array('access content'),
+	);
+    $items['getMinutes'] = array(
+	   'page callback' => 'mymodule_get_time',
+	   'type' => MENU_CALLBACK,
+	   'page arguments' => array(),
+	   'access arguments' =>  array('access content'),
+	);
+	$items['destroyEndsession'] = array(
+	   'page callback' => 'mymodule_unset_endsession',
+	   'type' => MENU_CALLBACK,
+	   'page arguments' => array(),
+	   'access arguments' =>  array('access content'),
+	);
+    $items['testmenu'] = array(
+       //'title' => 'Test Menu',
+       'page callback' => 'custom_next_prev_test',
+       'type' => MENU_CALLBACK,
+       'page arguments' => array(),
+       'access arguments' =>  array('access content'),
+    );
+    return $items;
+}//end of menu
+
+/**
+ * Callback function for testmenu
+**/
+function custom_next_prev_test() {
+  print "This is My Test Menu Function Callback";
+}
+
+
+
+function mymodule_unset_endsession(){
+      unset($_SESSION['endTime']);
+}
+function mymodule_get_time(){
+       if(empty($_SESSION['endTime'])){
+               $_SESSION['endTime'] = strtotime('+15 seconds');
+       }
+       $_SESSION['currentTime'] = time();
+	   if($_SESSION['currentTime'] >= $_SESSION['endTime']){
+		   $total_time = 0;
+	   } else{
+		   $total_time = $_SESSION['endTime'] - $_SESSION['currentTime'];
+	   }   
+       //$seconds    = intval($total_time % 60);
+       echo json_encode(array("seconds"=>$total_time));
+}
+function hp_load_more(){
+    $pageNo = filter_var($_POST['page_no'], FILTER_SANITIZE_NUMBER_INT);
+    
+    global $base_url;
+    $image_url = $base_url . '/' . drupal_get_path('theme', 'new_101_india_theme') . '/images/';
+    
+    $viewData = views_get_view('recent_content');
+    $viewData->set_display('page_1');
+    $viewData->set_current_page($pageNo);
+    $viewData->pre_execute();
+    $viewData->execute();
+    
+    $resultArr = $viewData->result;
+    
+    if(!empty($resultArr)){
+        foreach($resultArr as $rckey=>$recent){
+            $recentNode = $recent->_field_data['nid']['entity'];
+
+            $contentTypeName = $recent->field_field_article_category[0]['rendered']['#markup'];
+
+            $textClass = '';
+
+            if(strstr($contentTypeName,'101')){
+                if($contentTypeName == "101 Travel"){
+                    $typeLink = $base_url.'/travel-food';
+                    $typeName = 'Travel & Food';
+                    $linkClass = 'travelFood';
+                }else if($contentTypeName == "101 Janta"){
+                    $typeLink = $base_url.'/people';
+                    $typeName = 'People';
+                    $linkClass = 'people';
+                }else{
+                    $typeLink = $base_url.'/'.strtolower(str_replace('101 ','',$contentTypeName));
+                    $typeLink = str_replace(array(' & ', ' amp; ', ' &amp; ', ' Amp; '), array('-', '-', '-', '-'), $typeLink);
+                    $typeName = str_replace('101 ','',$contentTypeName);
+                    $textClass = str_replace('101 ','',$contentTypeName);
+                    $textClass = explode('&', $textClass);
+                    foreach($textClass as $tk=>$cat){
+                        if($tk == 0){
+                            $textClass[$tk] = strtolower($cat);
+                        }else{
+                            $textClass[$tk] = ucfirst($cat);
+                        }        
+                    }
+                    $textClass = implode('', $textClass);
+                    $linkClass = str_replace(array('&', 'amp;', '&amp;', 'Amp;', ' '), array('', '', '', '', ''), $textClass);
+                }
+            }else{
+                $typeLink = $base_url.'/'.strtolower($contentTypeName);
+                $typeLink = str_replace(array(' & ', ' amp; ', ' &amp; ', ' Amp; '), array('-', '-', '-', '-'), $typeLink);
+                $typeName = $contentTypeName;
+                $textClass = explode(' ', $contentTypeName);
+                foreach($textClass as $tk=>$cat){
+                    if($tk == 0){
+                        $textClass[$tk] = strtolower($cat);
+                    }else{
+                        $textClass[$tk] = ucfirst($cat);
+                    }        
+                }
+                $textClass = implode('', $textClass);
+                $linkClass = str_replace(array('&', 'amp;', '&amp;', 'Amp;', ' '), array('', '', '', '',''), $textClass);
+            }
+
+            $recentTitle = trim($recent->node_title);
+            $pos = 0;
+
+            if(strlen(trim($recentTitle)) > 90){
+                $pos = strpos($recentTitle, ' ', 86);
+                if($pos){
+                    $recentTitle = substr(trim($recentTitle), 0, $pos);
+                    $recentTitle .= '...';
+                }
+            }else{
+                $recentTitle = $recentTitle;
+                $pos = strpos($recentTitle, ' ', 86);
+            }
+
+            $recentSummary = field_get_items('node', $recentNode, 'body');
+
+            if(!empty($recentSummary[0]['summary'])){
+                if(strlen($recentSummary[0]['summary']) > 160){
+                    $recentSummary = substr($recentSummary[0]['summary'], 0, strpos($recentSummary[0]['summary'], ' ', 155));
+                    $recentSummary .= '...';
+                }else{
+                    $recentSummary = $recentSummary[0]['summary'];
+                }
+            }else{
+                if(strlen($recentSummary[0]['value']) > 160){
+                    $pos = strpos(strip_tags($recentSummary[0]['value']), ' ', 155);
+                    $recentSummary = substr(strip_tags($recentSummary[0]['value']), 0, $pos);
+                    $recentSummary .= '...';
+                }else{
+                    $recentSummary = strip_tags($recentSummary[0]['value']);
+                }
+            }
+
+            $recentDate = date('j M, Y', $recent->publication_date_published_at);
+
+            $recentImg = '';
+            $recentAlt = '';
+            $recentTtl = '';
+
+            $recentThbImg = field_get_items('node', $recentNode, 'field_thumb_image');
+
+            if(empty($recentThbImg)){
+                $recentThbImg = field_get_items('node', $recentNode, 'field_cover_image');
+            }
+
+            $recentImg = image_style_url('hp_whats_section', $recentThbImg[0]['uri']);
+
+            if(!empty($recentThbImg[0]['alt'])){
+                $recentAlt = $recentThbImg[0]['alt'];
+            }else{
+                $recentAlt = $recentNode->title;
+            }
+
+            if(!empty($recentThbImg[0]['title'])){
+                $recentTtl = $recentThbImg[0]['title'];
+            }else{
+                $recentTtl = $recentNode->title;
+            }
+
+            if($recentNode->type == 'videos'){
+                $recentContentIcon = $image_url . 'video-play-icon.png';
+                //$whatsNewContentText = '<span>' . '</span>';
+                $recentClass = ' class="play"';
+
+                $videoDuration = field_get_items('node', $recentNode, 'field_vzaar_video_duration');
+
+                $vidTimeStamphot = '';
+
+                if(!empty($videoDuration[0]['value'])){
+                    $vidTimeStamphot = $videoDuration[0]['value'];
+
+                    //echo '<pre style="display:none">Video Time Stamp for YT is: ' . $vidTimeStamp . '</pre>';
+                }else{
+                    $vidTimeStampSecs = $recentRes->field_field_brightcove_video[0]['rendered']['#video']->length;
+
+                    $min = ($vidTimeStampSecs/1000/60) << 0;
+                    $sec = round(($vidTimeStampSecs/1000) % 60);
+                    $vidTimeStamphot = ((strlen($min) == 1)?'0'.$min:$min) . ':' . ((strlen($sec) == 1)?'0'.$sec:$sec);
+
+                    //echo '<pre style="display:none">Video Time Stamp for Bcove is: ' . $vidTimeStamp . '</pre>';
+                }
+
+                $recentContentText = '<span class="timeSpan">' . $vidTimeStamphot . '</span>';
+            }else{
+                $recentContentIcon = $image_url . 'read-icon.jpg';
+                $recentContentText = '';
+                $recentClass = '';
+            }
+
+            $recentPath = url('node/' . $recentNode->nid, array('absolute' => true));
+            
+            echo '<div class="masonry-brick item '.$linkClass.'" style="opacity: 0;">
+                <div class="dataContainer">
+                    
+                    <div class="imageContent">
+                        <div class="categoryVal">
+                            <a href="'.$typeLink.'" >'.$typeName.'</a>
+                        </div>
+                        <a class="detailLink" href="'.$recentPath.'">
+                            <img src="'.$recentImg.'" alt="'.$recentAlt.'" title="'.$recentTtl.'" />
+                        </a>';
+						if($recentNode->type == 'videos'){
+						echo '<div class="iconWrap vidOpt"> 
+						   <a href="'.$recentPath.'" class="playVid"><span class="yellowPLay"></span>'.$recentContentText.'</a>
+						   <div class="clear"></div>
+						</div>';
+						} else if(($recentNode->type == 'series') && ($recentNode->field_video_checkbox['und'][0]['value'] == 1)) {
+                        echo '<div class="iconWrap vidOpt"> 
+                            <a href="'.$recentPath.'" class="playVid"><span class="yellowPLay"></span></a>
+                        </div>';
+                        } else if(($recentNode->type == 'series') && ($recentNode->field_video_checkbox['und'][0]['value'] == 0)){ 
+                                $recentContentIcon = $image_url . 'read-icon.jpg';
+                        echo '<div class="iconWrap" >
+                            <a href="'.$recentPath.'">  
+                                <img'.$recentClass.' src="'.$recentContentIcon.'" />'.$recentContentText.'
+                            </a>    
+                        </div>';
+						} else{
+                        echo '<div class="iconWrap" >
+                            <a href="'.$recentPath.'">  
+                                <img'.$recentClass.' src="'.$recentContentIcon.'" />'.$recentContentText.'
+                            </a>    
+                        </div>';
+						}
+                    echo '</div>
+                    <div class="summary">
+                        <h2><a href="'.$recentPath.'" >'.$recentTitle.'</a></h2>
+                        <p>'.$recentSummary.'</p>
+                        
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>';
+			
+			 if($rckey == 5){
+					echo  '<div class="yellowBg">
+							<div class="toLeft subsYoutube">
+								<div id="dynamic_yt_sub"><div class="g-ytsubscribe" data-channelid="UCZwZrym87YpirLIFBzTnWQA" data-layout="default" data-count="default"></div></div>
+							</div>
+							<div class="toRight">
+								<ul class="followOpts">
+									<li class="first">Follow us</li>
+									<li class="social">
+										<a href="https://www.facebook.com/101India" title="Facebook" target="_blank" class="fb_circle"></a>
+									</li>
+									<li class="social">
+										<a href="https://twitter.com/101India" target="_blank" title="Twitter" class="twit_circle"></a>
+									</li>
+									<li class="social">
+										<a href="http://i.instagram.com/101india/" target="_blank" title="Instagram" class="insta_circle"></a>
+									</li>
+									<li class="last">@101India</li>
+								</ul>
+							</div>
+						</div>';
+					 }
+        }
+    }
+}
+
+/**
+* Previous / Next function for nodes, ordered by node creation date
+*
+* @param $current_node: node object or node id
+* @param $node_types:  array of node types to query
+*
+* @return array
+* 
+*/
+function custom_prev_next_node($prevId = NULL, $nextId = NULL, $category = NULL, $current_nid = NULL, $node_types = array()) {
+    // make an array if string value was given
+    if (!is_array($node_types)) { $node_types = array($node_types); }
+	
+	$contentTypeCond = '';
+	$contentTypeArr = array();
+	
+	if(isset($node_types['not_in']) && !empty($node_types['not_in'])){
+		$contentTypeCond = 'NOT IN';
+		$contentTypeArr = $node_types['not_in'];
+	}else if(isset($node_types['in']) && !empty($node_types['in'])){
+		$contentTypeCond = 'IN';
+		$contentTypeArr = $node_types['in'];
+	}
+
+	// if there is prev id present, that means its a part of the series so fetch that detail or else proceed with the category wise.
+	if($prevId!=""){
+		$query = db_select('node', 'n');
+		
+		$prev  =  $query
+		->fields('n',array('nid','title','created'))
+		->condition('n.status', 1,'=')
+		->condition('n.nid', $prevId,'=')
+		->orderBy('n.nid','DESC')
+		->range(0,1)
+		->execute()
+		->fetchAssoc();
+	}
+	else{
+		$query = db_select('node', 'n');
+		$query->join('field_data_field_article_category', 'ac', 'n.nid = ac.entity_id');
+		
+		$prev  =  $query
+		->fields('n',array('nid','title','created'))
+		->condition('n.status', 1,'=')
+		->condition('ac.field_article_category_tid',$category,'=')
+		->condition('n.type', $contentTypeArr, $contentTypeCond)
+		->condition('n.nid', $current_nid,'<')
+		->orderBy('n.nid','DESC')
+		->range(0,1)
+		->execute()
+		->fetchAssoc();
+	}
+	
+    // if there is next id present, that means its a part of the series so fetch that detail or else proceed with the category wise.
+    if($nextId!=""){
+		$nextQuery = db_select('node', 'n');
+		
+		$next  =  $nextQuery
+		->fields('n',array('nid','title','created'))
+		->condition('n.status', 1,'=')
+		->condition('n.nid', $nextId,'=')
+		->orderBy('n.nid','ASC')
+		->range(0,1)
+		->execute()
+		->fetchAssoc();
+	}
+	else{
+		$nextQuery = db_select('node', 'n');
+		$nextQuery->join('field_data_field_article_category', 'ac', 'n.nid = ac.entity_id');
+		
+		$next  =  $nextQuery
+		->fields('n',array('nid','title','created'))
+		->condition('n.status', 1,'=')
+		->condition('ac.field_article_category_tid',$category,'=')
+		->condition('n.type', $contentTypeArr, $contentTypeCond)
+		->condition('n.nid', $current_nid,'>')
+		->orderBy('n.nid','ASC')
+		->range(0,1)
+		->execute()
+		->fetchAssoc();
+	}
+	
+	if(isset($prev) && !empty($prev)){
+		$prev['link'] = url('node/' . $prev['nid'], array('absolute' => true));
+	}
+	
+	if(isset($next) && !empty($next)){
+		$next['link'] = url('node/' . $next['nid'], array('absolute' => true));
+	}
+
+    return array('prev' => $prev, 'next' => $next);
+}
+
+function custom_next_prev_url_outbound_alter(&$path, &$options, $original_path) {
+    //echo '<pre style="display: none;">';print_r($options);echo '</pre>';
+    // Always make login/logout links go to the current page.
+    //switch ($path) {
+        //case 'all':
+    if(!strstr($path, 'search/site')){
+        if(isset($options['query']['page']) && !empty($options['query']['page'])){
+            $currPage = $options['query']['page'];
+            $options['query']['page'] = (int)$currPage + 1;
+        }
+    }
+            //break;
+    //}
+}
+
+function custom_next_prev_url_inbound_alter(&$path, $original_path, $path_language) {
+    //if(isset($_GET['page']) && !empty($_GET['page'])){
+    if($path == 'all'){
+        $currPage = $_GET['page'];
+        $_GET['page'] = (int)$currPage - 1;
+    }
+}
+
+/**
+ * Implements hook_views_rss_item_elements().
+ */
+function custom_next_prev_views_rss_item_elements() {
+  $elements['link'] = array(
+    'title' => t('Link'),
+    'description' => t('Provides a link to an item element in Views RSS.'),
+  );
+  $elements['title'] = array(
+    'title' => t('Title'),
+    'description' => t('Provides a title to an item element in Views RSS.'),
+  );
+  $elements['summary'] = array(
+    'title' => t('Summary'),
+    'description' => t('Provides a summary to an item element in Views RSS.'),
+  );
+  $elements['description'] = array(
+    'title' => t('Description'),
+    'description' => t('Provides a description to an item element in Views RSS.'),
+  );
+  $elements['category'] = array(
+    'title' => t('Category'),
+    'description' => t('Provides a category to an item element in Views RSS.'),
+  );
+  $elements['thumb image'] = array(
+    'title' => t('Thumb Image'),
+    'description' => t('Provides a thumb image to an item element in Views RSS.'),
+  );
+  $elements['cover image'] = array(
+    'title' => t('Cover Image'),
+    'description' => t('Provides a cover image to an item element in Views RSS.'),
+  );
+  $elements['master_head'] = array(
+    'title' => t('Master Head'),
+    'description' => t('Provides a master_head to an item element in Views RSS.'),
+  );
+  $elements['youtube_url'] = array(
+    'title' => t('Youtube Url'),
+    'description' => t('Provides a youtube_url to an item element in Views RSS.'),
+  );
+  return $elements;
+}
+
+function custom_next_prev_views_rss_channel_elements() {
+    $elements['link'] = array(
+        'title' => t('Link'),
+        'description' => t('Provides a link to an channel core element in Views RSS.'),
+      );
+    return $elements;
+}

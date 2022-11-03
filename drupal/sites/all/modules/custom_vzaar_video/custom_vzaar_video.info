@@ -1,0 +1,4 @@
+name = Custom vzaar video
+description = "Custom module for vzaar video"
+package = Experience Commerce
+core = 7.x

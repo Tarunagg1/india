@@ -1,0 +1,91 @@
+@charset "utf-8";
+/* CSS Document */
+
+.seriesLanding {
+	background:#1c2238;
+}
+
+.seriesLanding .seriesContent{
+	margin-left:8.8em;
+}
+
+.storyContainer{
+	padding:4.5em;
+}
+
+.seriesLanding .lhsContent{
+    width: 33.5%;
+	float:left;
+	background: #12172a; /* Old browsers */
+}
+
+.seriesLanding .lhsContent h2{
+	text-align:left;
+	padding:0;
+}
+
+.seriesLanding .lhsContent p{
+	color: #d5d5d5;
+    font-size: 1.5em;
+    line-height: 2em;
+	padding: 1em 0;
+}
+
+.socialIconsContainer{
+	
+}
+
+.socialIconsContainer .twitterIcon, .socialIconsContainer .fbIcon, .socialIconsContainer .gplusIcon{
+	float:left;
+	padding: 1em;
+}
+
+.seriesLanding .rhsContent{
+	float: left;
+	width: 64%;
+	padding: 1.4em 1.4em 0em 1.4em;
+}
+
+.seriesLanding .rhsContent .imageContainer{
+	position:relative;
+}
+
+.seriesLanding .rhsContent .imageContainer .imageOverlay{
+	margin:1em;
+	width:96%;
+	background:#12172a;
+	opacity:0.8;
+}
+
+.seriesLanding .rightContent{
+	width:100%;
+}
+
+.seriesLanding .imageContainer img{
+	max-width:100%;
+}
+
+.seriesList .masonryItemWrapper{
+	padding:0;
+}
+
+.seriesList{
+	margin: 0 auto;
+    width: 100%;
+}
+
+.similarStoriesSection{
+	background:#fafafa;
+}
+
+.similarStoriesSection h2::before, .similarStoriesSection h2::after{
+	background: url(../images/similar-story.png) no-repeat left center;
+	width: 8%;
+	content: "sometext";
+	text-indent: -99999px;
+	display: inline-block;
+}
+
+.similarStoriesSection h2::after{
+	background:url(../images/similar-story.png) no-repeat right center;
+}

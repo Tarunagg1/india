@@ -1,0 +1,69 @@
+<?php
+/**
+ * @file
+ * Unit tests for the statistics_advanced module.
+ */
+
+/**
+ * Test basic statistics advanced functionality.
+ */
+class StatisticsAdvancedTestCase extends DrupalWebTestCase {
+  public static function getInfo() {
+    return array(
+      'name' => t('Statistics advanced settings functionality'),
+      'description' => t('Test basic statistics advanced settings module functionality.'),
+      'group' => t('Statistics advanced settings'),
+    );
+  }
+
+  function setUp() {
+    parent::setUp('statistics', 'statistics_advanced');
+
+    // Set some required core statistics module variables.
+    variable_set('statistics_count_content_views', 1);
+    variable_set('statistics_enable_access_log', 1);
+
+  }
+
+  function testNodeCounter() {
+    // TODO
+  }
+
+  /**
+   * Test that an invalid nodes will not cause a record to be added to the
+   * node_counter table.
+   */
+  function testInvalidNodeCounter() {
+    // TODO
+  }
+
+  /**
+   * Test user exclusion from the access log.
+   */
+  function testAccessLogExclusion() {
+    // TODO
+  }
+}
+
+/**
+ * Test basic statistics advanced functionality.
+ */
+class StatisticsAdvancedAdminTestCase extends DrupalWebTestCase {
+  public static function getInfo() {
+    return array(
+      'name' => t('Statistics advanced settings administration'),
+      'description' => t('Test statistics advanced settings module administration.'),
+      'group' => t('Statistics advanced settings'),
+    );
+  }
+
+  function setUp() {
+    parent::setUp('statistics', 'statistics_advanced');
+    $this->user_admin = $this->drupalCreateUser(array('access content', 'view post access counter', 'administer site configuration'));
+    $this->node = $this->drupalCreateNode();
+  }
+
+  function testAdminInterface() {
+    // TODO
+  }
+}

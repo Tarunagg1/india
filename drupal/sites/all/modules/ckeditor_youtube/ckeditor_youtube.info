@@ -1,0 +1,5 @@
+name = CKEditor Youtube
+description = Integrates the Youtube plugin for CKEditor
+package = Experience Commerce
+core = 7.x
+dependencies[] = wysiwyg

@@ -1,0 +1,8 @@
+{
+  "name": "101india.com",
+  "short_name": "101india.com",
+  "start_url": "/",
+  "display": "standalone",
+  "gcm_sender_id": "597425966850",
+  "gcm_user_visible_only": true
+}

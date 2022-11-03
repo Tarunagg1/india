@@ -1,0 +1,8 @@
+name = Statistics advanced settings
+description = Adds advanced settings and extra functionality to the Statistics module.
+core = 7.x
+package = "Statistics"
+version = 7.x-1.x-dev
+dependencies[] = statistics
+suggests[] = browscap
+files[] = statistics_advanced.test

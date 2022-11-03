@@ -1,0 +1,145 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>101 About Us Page</title>
+<script src="../scripts/jquery-1.8.3.min.js"></script>
+<script src="../scripts/jquery.mousewheel.js"></script>
+<script src="../scripts/jquery.jscrollpane.min.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="../css/jquery.jscrollpane.custom.css">
+<link rel="stylesheet" type="text/css" href="../css/global.css">
+
+</head>
+<script type="text/javascript">
+
+$(document).ready(function() {
+     menuContent();
+     scollmenu();
+     closebtn();
+     
+});	
+
+function menuContent(){
+    $('.menuOption6').click(function() {
+           $('.menuContentWrapper').toggleClass('slide');
+           $('.mainContent').toggleClass('slidehomeContent');
+           $('#nav-toggle').addClass('active');
+           $('.tooltip').removeClass('onHover');
+           $('.tooltipText').removeClass('textOnHover');
+           $('.lhsFixed').hide();
+           $('.menuOption5').fadeOut(100);
+           $('.menuOption6').fadeOut(100);
+           $('.lhsFixed.expandedOptions').fadeIn();
+           $('.logo').addClass('logoScale');
+           $('.menuWrapper').addClass('menuWrapperExpand');
+        });
+}
+	
+    function scollmenu(){
+           $('.slideOptionsWrapper').jScrollPane({
+            autoReinitialise: true,
+            hideFocus: true,
+			contentWidth: '0px'
+        });
+    }
+	
+ 
+
+
+ function closebtn(){
+        $('#nav-toggle').click(function(){
+            $('.menuContentWrapper').removeClass('slide');
+            $('.mainContent').removeClass('slidehomeContent');
+            $(this).removeClass('active');
+            $('.tooltip').addClass('onHover');
+            $('.tooltipText').addClass('textOnHover');
+            $('.lhsFixed').show();
+            $('.menuOption5').delay(500).fadeIn();
+           $('.menuOption6').delay(500).fadeIn();
+           $('.logo').removeClass('logoScale');
+            $('.menuWrapper').removeClass('menuWrapperExpand');
+        });
+    }
+</script>
+<body>
+<div class="page">
+        <div class="menuWrapper">
+            <div class="logoWrapper">
+                <div class="logo">
+                    <img src="../images/101india-logo.png" />
+                </div>
+            </div>
+             
+        
+            <div class="lhsFixed">
+                <div class="sideOptions menuoptions">
+                    <ul>
+                        <li>
+                            <a class="tooltip menuOption1 onHover" href="javascript:;"><span class="tooltipText textOnHover">NEW BORN</span></a>
+                        </li>
+                        <li>
+                            <a class="tooltip menuOption2 onHover" href="javascript:;"><span class="tooltipText textOnHover">EPIC SHIT</span></a>
+                        </li>
+                        <li><a class="tooltip menuOption3 onHover" href="javascript:;"><span class="tooltipText textOnHover">SEEN MOST</span></a>
+                        </li>
+                        <li><a class="tooltip menuOption4 onHover" href="javascript:;"><span class="tooltipText textOnHover">101s</span></a>
+                        </li>
+                        <li><a class="tooltip menuOption5 onHover" href="javascript:;"><span class="tooltipText textOnHover">SEARCH</span></a>
+                        </li>
+                        <li><a class="tooltip menuOption6 onHover" href="javascript:;"><span class="tooltipText textOnHover">More</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <div class="menuContentWrapper expandMenu">
+                <div class="lhsFixed expandedOptions">
+                     <a id="nav-toggle" href="javascript:;"><span></span></a>
+                    <div class="slideOptionsWrapper">
+                        <div class="sideOptions menuoptions">
+                            <ul>
+                                <li>
+                                    <a class="tooltip menuOption1 onHover" href="javascript:;"><span class="tooltipText textOnHover">NEW BORN</span></a>
+                                </li>
+                                <li>
+                                    <a class="tooltip menuOption2 onHover" href="javascript:;"><span class="tooltipText textOnHover">EPIC SHIT</span></a>
+                                </li>
+                                <li><a class="tooltip menuOption3 onHover" href="javascript:;"><span class="tooltipText textOnHover">SEEN MOST</span></a>
+                                </li>
+                                <li><a class="tooltip menuOption4 onHover" href="javascript:;"><span class="tooltipText textOnHover">101s</span></a>
+                                </li>
+                                <li><a class="tooltip menuOption5 onHover" href="javascript:;"><span class="tooltipText textOnHover">SEARCH</span></a>
+                                </li>
+                                <li><a class="tooltip menuOption6 onHover" href="javascript:;"><span class="tooltipText textOnHover">More</span></a>
+                                </li>
+                            </ul>
+                            <div class="bottomMenu">
+                                <div class="searchContent">
+                                      <input type="text" class="searchBox" size="21" maxlength="120" placeholder="SEARCH"><input type="submit" value=" " class="searchBtn">
+                                </div>
+                                <ul>
+                                    <li><span class="tooltipText">LOGIN</span></li>
+                                    <li><span class="tooltipText">SIGNUP</span> </li>
+                                    <li><span class="tooltipText">ABOUT US</span></li>
+                                    <li><span class="tooltipText">CONTACT</span></li>
+                                    <li><span class="tooltipText">PRIVACY POLICY</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+       </div>
+   		<div class="mainContent">
+        	<div class="staticContent">
+       			<h1>About Us</h1>
+        		<p>Vivamus tincidunt venenatis lorem eget sollicitudin. Sed mollis ipsum quis fermentum maximus. Suspendisse potenti. Vivamus magna neque, ultrices ac erat ut, eleifend consectetur massa. Nunc ac posuere nibh, venenatis elementum neque. Donec convallis facilisis aliquet. Donec vehicula tortor et dictum placerat. Suspendisse nunc nisi, commodo vel urna et, blandit maximus urna. Praesent non ipsum quis metus varius imperdiet sed a arcu. Sed hendrerit blandit ultrices. Nulla ullamcorper augue ac neque hendrerit sodales. Nulla ac aliquam tellus. Aenean posuere magna quis posuere blandit. Vivamus eu sagittis nisi.</p>
+        		<p>Nam scelerisque, arcu sit amet laoreet laoreet, libero turpis dapibus lorem, bibendum sollicitudin enim mauris ut dui. Nunc molestie lacus a risus sodales feugiat id at dolor. Curabitur faucibus nisl ligula, ut dapibus sem mattis vel. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum faucibus massa a ipsum molestie, ac fermentum turpis vulputate. Etiam ex tellus, euismod et molestie at, posuere vitae dui. Morbi placerat nibh eget varius suscipit. Vivamus eu tellus id tellus consectetur auctor. Morbi egestas nec metus pretium faucibus. Nunc nec tellus semper, dictum tellus vitae, condimentum ligula. Donec sem lectus, pulvinar ut mauris et, fringilla bibendum nibh. Quisque interdum id tortor vitae dictum.</p>
+        		<p>Donec efficitur eros nec rhoncus dapibus. Suspendisse venenatis turpis quam, in viverra tortor condimentum a. Fusce mauris ipsum, blandit nec arcu vitae, laoreet interdum lorem. Nulla elementum lacus vel diam suscipit mollis. Maecenas in odio diam. Nulla facilisi. Phasellus blandit, elit eu venenatis feugiat, ex mi porta nunc, id congue mauris purus condimentum turpis. Maecenas scelerisque risus nec velit tempus suscipit. Mauris aliquam nunc vitae massa mattis tempus. Suspendisse potenti. Vestibulum porta suscipit rhoncus.</p>
+           </div>
+    </div>
+  </div>
+</body>
+</html>

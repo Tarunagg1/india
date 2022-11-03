@@ -1,0 +1,197 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Untitled Document</title>
+    <script src="../scripts/jquery-1.8.3.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/global.css">
+    <style>
+        body,
+        html {
+            height: 100%;
+            max-height: 100%
+        }
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        img {
+            max-width: 100%;
+        }
+        .clear:after {
+            visibility: hidden;
+            display: block;
+            font-size: 0;
+            content: " ";
+            clear: both;
+            height: 0;
+        }
+        body {
+            color: #1F253D;
+            font-family: "Franklin Gothic Medium", "Franklin Gothic", Arial, sans-serif;
+            font-size: 62.6%;
+            background: #dfdedc;
+            line-height: 1.35;
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            position: relative;
+            overflow-x: hidden;
+        }
+        .page {
+            position: relative;
+            height: 100%;
+        }
+        
+        .fixedPanel {
+            position: fixed;
+            top: 0;
+            width: 9%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .fixedPanel.slideContent{
+            width:20%;
+        }
+        
+        .mainContent {
+            position: relative;
+            left: 9%;
+            width: 90%;
+            max-width: 1165px;
+        }
+        .mainContent.slideContent {
+            left: 20%;
+        }
+        .menuBtnWrap {
+            position: fixed;
+            top: 0;
+            width: inherit;
+            z-index: 3;
+            background: #000;
+        }
+        .menuBtnWrap .menuBtn {
+            margin: 0.5em 0 0 0.5em;
+            width: 10%;
+        }
+        .menuBtnWrap .menuBtn img {
+            max-width: 100%;
+        }
+        li {
+            list-style-type: none;
+        }
+        .menu {
+            position: relative;
+            top: 0;
+            height: 100%;
+            background:#000;
+            z-index:2;
+        }
+        .menu.expandedMenu {
+           /* width: 100%;*/
+            
+        }
+        .navWrap {
+            position: relative;
+            top: 0;
+            display:none;
+            height:100%;
+        }
+        .expandedMenu .navWrap {
+           display:block;
+        }
+        .navWrap ul {
+            padding-top: 8em;
+        }
+        .navWrap li {
+            padding: 0.5em;
+            margin: 0 0 1em 0;
+        }
+        @media screen and (max-width: 670px) {
+            .menu {
+                position: fixed;
+                z-index: 2;
+            }
+            .menuBtnWrap {
+                width: 100%;
+            }
+            .mainContent {
+                top: 3.8em;
+                left: 0;
+                width:100%;
+            }
+            .menu.expandedMenu {
+                width: 35%;
+            }
+            
+            .fixedPanel.slideContent{
+                width:35%;
+            }
+            .mainContent.slideContent {
+                left: 35%;
+            }
+        }
+    </style>
+    <script>
+        $('.menuBtn').live('click', function () {
+            if ($(this).hasClass('active')) {
+                $(this).removeClass('active');
+                $('.mainContent').removeClass('slideContent');
+                $('.fixedPanel').removeClass('slideContent');
+                $('.menu').removeClass('expandedMenu');
+
+            } else {
+                $(this).addClass('active');
+                $('.mainContent').addClass('slideContent');
+                $('.fixedPanel').addClass('slideContent');
+                $('.menu').addClass('expandedMenu');
+            }
+
+        })
+    </script>
+</head>
+
+<body>
+    <div class="page">
+
+        <div class="fixedPanel">
+            <div class="menuBtnWrap">
+                <div class="menuBtn">
+                    <img src="../images/final-logo.png" alt="" />
+                </div>
+            </div>
+            <div class="menu">
+
+                <div class="navWrap">
+                    <ul>
+                        <li><span>Menuitem1</span>
+                        </li>
+                        <li><span>Menuitem2</span>
+                        </li>
+                        <li><span>Menuitem3</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="mainContent">
+            <div class="mainContentWrap">
+                <div class="img">
+                    <img src="../images/cover-post-image.jpg" />
+                </div>
+                <div class="img">
+                    <img src="../images/cover-post-image.jpg" />
+                </div>
+                <div class="img">
+                    <img src="../images/cover-post-image.jpg" />
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

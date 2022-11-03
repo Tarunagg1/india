@@ -1,0 +1,71 @@
+<?php
+function subscription_menu(){
+	
+	$items['submit-subscriptions'] = array(
+		'page callback' => 'subscriptions',
+		'type' => MENU_CALLBACK,
+		'page arguments' => array(),
+		'access arguments' =>  array('access content'),
+	);
+  return $items;
+}
+function subscriptions(){
+	$error = false; 
+	$email_id = filter_var($_POST["email"], FILTER_SANITIZE_EMAIL);
+	$title_is_unique = 0;
+	
+	if (!filter_var($email_id, FILTER_VALIDATE_EMAIL)) {
+      $error = true; 
+    }
+
+	$exp = "/^[a-z\'0-9]+([._-][a-z\'0-9]+)*@([a-z0-9]+([._-][a-z0-9]+))+$/i";
+	if(preg_match($exp,$email_id)){
+        
+	  if(checkdnsrr(array_pop(explode("@",$email_id)),"MX")){
+		$error = false; 
+	  }else{
+		$error = true; 
+	  }
+        
+	}
+	if($error==false){
+		$result = new EntityFieldQuery();
+        $result->entityCondition('entity_type', 'node')
+            ->propertyCondition('title', "Subscription - ".$email_id)
+            ->execute();
+
+		$title_is_unique = count($result->ordered_results);
+        
+		if($title_is_unique > 0){
+			$error = true;
+		}
+	}
+	if($error==false){
+		$node = new stdClass(); // Create a new node object
+		$node->type = "subscription_entries"; // Or page, or whatever content type you like
+		node_object_prepare($node); // Set some default values
+		
+		$node->title    = "Subscription - ".$email_id;
+		$node->language = LANGUAGE_NONE; // Or e.g. 'en' if locale is enabled
+
+		$node->uid = 1; // UID of the author of the node; or use $node->name
+
+		$node->field_email_id[$node->language][]['value']  = $email_id;
+
+		if($node = node_submit($node)) { // Prepare node for saving
+			node_save($node);
+			$_SESSION["user_subscribed"]="yes";
+            $_SESSION['user_subscribe_expire'] = time() + 1800;
+            
+			echo $node->nid;
+		}else{
+			echo 'Database error occured';
+		}
+	}else{
+		if($title_is_unique>0){
+			echo 'Already Exist';
+		}else{
+			echo 'Failure';
+		}
+	}
+}

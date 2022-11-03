@@ -1,0 +1,761 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>101 Home Landing page</title>
+<script src="../scripts/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="../scripts/masonry.pkgd.min.js"></script>
+<script type="text/javascript" src="../scripts/owl.carousel.min.js"></script>
+<script type="text/javascript" src="../scripts/imagesloaded.min.js"></script>
+<script src="../scripts/jquery.mousewheel.js"></script>
+<script src="../scripts/jquery.jscrollpane.min.js" type="text/javascript"></script>
+
+<link rel="stylesheet" type="text/css" href="../css/owl.carousel.css">
+<link rel="stylesheet" type="text/css" href="../css/owl.theme.css">
+<link rel="stylesheet" type="text/css" href="../css/owl.transitions.css">
+<link rel="stylesheet" type="text/css" href="../css/jquery.jscrollpane.custom.css">
+<link rel="stylesheet" type="text/css" href="../css/global.css">
+<script type="text/javascript">
+
+$(document).ready(function() {
+   //  menuContent();
+    // scollmenu();
+    //  closebtn();
+ initBlockLayout();
+  initMasonry();
+   
+    // socialShare();
+});	
+    
+function socialShare(){
+    $('.socialShare').hover(function(){
+        $(this).addClass("active");
+        $(this).find('.postButton').show();
+        //$(this).animate({width:'100%'},1000);
+    },
+    function(){
+        $(this).removeClass("active");
+       // $(this).animate({width:'0%'},1000);
+        $(this).find('.postButton').hide();
+    });
+                
+                            
+}
+
+
+	
+    function scollmenu(){
+           $('.slideOptionsWrapper').jScrollPane({
+            autoReinitialise: true,
+            hideFocus: true
+        });
+    }
+	
+    function initBlockLayout(){
+        $("#owl-example").owlCarousel({
+        slideSpeed : 300,
+        autoPlay : false,
+        items:2,
+        pagination:true,
+        stopOnHover : true,
+        itemsDesktop: false,
+        itemsMobile : [768,1]
+
+        });
+    }
+
+
+function initMasonry(){
+	var $container = $('#masonry');
+	$container.masonry({
+		itemSelector: '.item',
+		//columnWidth:  $container.width() / 3,
+		gutter:0,
+	}).imagesLoaded(function(){
+		$container.masonry('reloadItems')
+	});		
+}
+
+
+$('.menuOption6').live('click',  function(){
+    if ($(this).hasClass('active')){
+    //close menu
+     $(this).removeClass('active');
+     closeMenu();
+     $('.menu-toggle').fadeOut().removeClass('active');
+    
+    }else{
+    //open menu
+      $(this).addClass('active');
+      openMenu();
+      $('.menu-toggle').fadeIn(1000).addClass('active');
+    }
+
+});
+    
+$('.menu-toggle').live('click',  function(){
+    if ($(this).hasClass('active')){
+    //close menu
+     $(this).removeClass('active');
+     closeMenu();
+     $('.menuOption6').fadeIn(1000).removeClass('active');
+    }else{
+    //open menu
+      
+      $(this).addClass('active');
+      openMenu(); 
+      //$('.menuOption6').fadeIn(1000).addClass('active');
+    }
+
+});
+    
+function openMenu(){
+    $(this).addClass('active');
+    $('.mainContent').addClass('slideContent');
+    $('.fixedPanel').addClass('slideContent');
+    $('.menu').addClass('expandedMenu');
+}
+
+function closeMenu(){
+   
+    $('.mainContent').removeClass('slideContent');
+    $('.fixedPanel').removeClass('slideContent');
+    $('.menu').removeClass('expandedMenu');
+}
+
+</script>
+</head>
+
+<body>
+	<div class="page">
+    	
+          <div class="fixedPanel">
+            <div class="menuBtnWrap">
+                <div class="logo">
+                    <img src="../images/final-logo.png" alt="" />
+                </div>
+                <div class="mobileMenuBtn"><a id="menu-toggle" class="menu-toggle" href="javascript:;"></a></div>
+            </div>
+            <div class="menu">
+
+                <div class="navWrap">
+                    <div class="sideOptions menuoptions">
+                            <ul>
+                                <li>
+                                    <a class="tooltip menuOption1 " href="javascript:;"><span class="tooltipText textOnHover">WET PAINT</span></a>
+                                </li>
+                                <li>
+                                    <a class="tooltip menuOption2 " href="javascript:;"><span class="tooltipText textOnHover">EPIC SHIT</span></a>
+                                </li>
+                                <li><a class="tooltip menuOption3 " href="javascript:;"><span class="tooltipText textOnHover">SEEN MOST</span></a>
+                                </li>
+                                <li><a class="tooltip menuOption4 " href="javascript:;"><span class="tooltipText textOnHover">101s</span></a>
+                                </li>
+                                <li class="listSearchItem listItem"><a class="tooltip menuOption5 " href="javascript:;"><span class="tooltipText textOnHover">SEARCH</span></a>
+                                </li>
+                                <li class="listMoreItem listItem"><a class="tooltip menuOption6 " href="javascript:;"><span class="tooltipText textOnHover">More</span></a>
+                                </li>
+                            </ul>
+                                <div class="bottomMenu">
+                                    
+                                    <ul>
+                                        <li>
+                                        <div class="searchContent">
+                                          <input type="text" class="searchBox" size="21" maxlength="120" placeholder="SEARCH"><input type="submit" value=" " class="searchBtn">
+                                    </div>
+                                        </li>
+                                        <li><span class="tooltipText">LOGIN</span></li>
+                                        <li><span class="tooltipText">SIGNUP</span> </li>
+                                        <li><span class="tooltipText">ABOUT US</span></li>
+                                        <li><span class="tooltipText">CONTACT</span></li>
+                                        <li><span class="tooltipText">PRIVACY POLICY</span></li>
+                                    </ul>
+                                </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    	<div class="mainContent">
+        <section class="featuredContent">
+        	<div class="wrapper">
+    			<div id="owl-example" class="owl-carousel owl-theme">
+                    <div class="items">
+                    <img  src="../images/slider-1.jpg" />
+                    <div class="imageOverlay">
+                        <div class="rhsContainer">
+                        	<h2>15 Underrated Destinations In India Every Traveler Must Check Out</h2>
+                            <p>India has no dearth of beautiful travel destinations. Some are more popular and more commercialized than others. That in no way implies that the lesser-known places have anything less to offer... <a href="series-landing.html">Read More</a></p>
+                            <span>24 Sept. 2014</span>
+                        </div>
+                    	<div class="lhsContainer">
+                        	<div class="videoContainer">
+                            	<a href="series-landing.html"><img src="../images/video-pink-icon.png" /></a>
+                            </div>
+                            <div class="cameraContainer">
+                            	<div class="socialShare">
+                                        <div class="shareIcon"></div>
+                                        <ul class="postButton">
+                                            <li><a href="javascript:;" class="fb">facebook</a></li>
+                                             <li><a href="javascript:;" class="tw">Twitter</a></li>
+                                             <li><a href="javascript:;" class="gplus">Gplus</a></li>
+                                             <li><a href="javascript:;" class="mail">Email</a></li>
+                                        </ul>
+                                        <div class="clear"></div>
+                                    </div>
+                            </div>
+                        </div>
+                        <span class="date">24 Sept. 2014</span>
+                        <div class="clear"></div>
+                    </div>
+                    </div>
+                    <div class="items">
+                    <img  src="../images/slider-2.jpg" />
+                    <div class="imageOverlay">
+                        <div class="rhsContainer">
+                        	<h2>11 Reasons Why We Should Reconnect With Our Old Friends</h2>
+                            <p>India has no dearth of beautiful travel destinations. Some are more popular and more commercialized than others. That in no way implies that the lesser-known places have anything less to offer... <a href="series-landing.html">Read More</a></p>
+                            <span>24 Sept. 2014</span>
+                        </div>
+                    	<div class="lhsContainer">
+                        	<div class="videoContainer">
+                            	<a href="series-landing.html"><img src="../images/camera-pink-icon.png" /></a>
+                            </div>
+                            <div class="cameraContainer">
+                            	<div class="socialShare">
+                                        <div class="shareIcon"></div>
+                                        <ul class="postButton">
+                                            <li><a href="javascript:;" class="fb">facebook</a></li>
+                                             <li><a href="javascript:;" class="tw">Twitter</a></li>
+                                             <li><a href="javascript:;" class="gplus">Gplus</a></li>
+                                             <li><a href="javascript:;" class="mail">Email</a></li>
+                                        </ul>
+                                        <div class="clear"></div>
+                                    </div>
+                            </div>
+                        </div>
+                        <span class="date">24 Sept. 2014</span>
+                        <div class="clear"></div>
+                    </div>
+                    </div>
+                    <div class="items">
+                    <img  src="../images/slider-1.jpg" />
+                    <div class="imageOverlay">
+                        <div class="rhsContainer">
+                        	<h2>15 Underrated Destinations In India Every Traveler Must Check Out</h2>
+                            <p>India has no dearth of beautiful travel destinations. Some are more popular and more commercialized than others. That in no way implies that the lesser-known places have anything less to offer... <a href="series-landing.html">Read More</a></p>
+                            <span>24 Sept. 2014</span>
+                        </div>
+                    	<div class="lhsContainer">
+                        	<div class="videoContainer">
+                            	<a href="series-landing.html"><img src="../images/video-pink-icon.png" /></a>
+                            </div>
+                            <div class="cameraContainer">
+                            <div class="socialShare">
+                                        <div class="shareIcon"></div>
+                                        <ul class="postButton">
+                                            <li><a href="javascript:;" class="fb">facebook</a></li>
+                                             <li><a href="javascript:;" class="tw">Twitter</a></li>
+                                             <li><a href="javascript:;" class="gplus">Gplus</a></li>
+                                             <li><a href="javascript:;" class="mail">Email</a></li>
+                                        </ul>
+                                        <div class="clear"></div>
+                                    </div>
+                            </div>
+                        </div>
+                        <span class="date">24 Sept. 2014</span>
+                        <div class="clear"></div>
+                    </div>
+                    </div>
+                    <div class="items">
+                    <img  src="../images/slider-2.jpg" />
+                    <div class="imageOverlay">
+                        <div class="rhsContainer">
+                        	<h2>11 Reasons Why We Should Reconnect With Our Old Friends</h2>
+                            <p>India has no dearth of beautiful travel destinations. Some are more popular and more commercialized than others. That in no way implies that the lesser-known places have anything less to offer... <a href="series-landing.html">Read More</a></p>
+                            <span>24 Sept. 2014</span>
+                        </div>
+                    	<div class="lhsContainer">
+                        	<div class="videoContainer">
+                            	<a href="series-landing.html"><img src="../images/camera-pink-icon.png" /></a>
+                            </div>
+                            <div class="cameraContainer">
+                            <div class="socialShare">
+                                        <div class="shareIcon"></div>
+                                        <ul class="postButton">
+                                            <li><a href="javascript:;" class="fb">facebook</a></li>
+                                             <li><a href="javascript:;" class="tw">Twitter</a></li>
+                                             <li><a href="javascript:;" class="gplus">Gplus</a></li>
+                                             <li><a href="javascript:;" class="mail">Email</a></li>
+                                        </ul>
+                                        <div class="clear"></div>
+                                    </div>
+                            </div>
+                        </div>
+                        <span class="date">24 Sept. 2014</span>
+                    </div>
+                    </div>
+        </div>
+        	</div>
+        </section>
+        <section class="wetPaintSection">
+        	<div class="wrapper">
+        	<h2>New Born</h2>
+            <div class="wetPaintContent">
+                	<div class="itemWrap">
+                    	<div class="topicImageContainer">
+                        	<img src="../images/konkona-sen.jpg" />
+                        </div>
+                        <div class="description">
+                            <div class="topicHeader">
+                                10 Reasons Why Moving To A New City Is An Experience Like No Other
+                            </div>
+                            <div class="topicSummary">
+                                <p>Cricket. A sport everywhere else in the world, but a religion in India. A lot of people play it, a lot more watch it, but every single Indian talks about it... <a class="readMore" href="series-landing.html">Read More</a></p>
+                            </div>
+                            <div class="mediaIconHolder">
+                                <div class="mediaIcon video">
+                                	<img src="../images/video-pink-icon.png" />
+                                </div>
+                                <div class="mediaIcon more">
+                                    <div class="socialShare">
+                                        <div class="shareIcon"></div>
+                                        <ul class="postButton">
+                                            <li><a href="javascript:;" class="fb">facebook</a></li>
+                                             <li><a href="javascript:;" class="tw">Twitter</a></li>
+                                             <li><a href="javascript:;" class="gplus">Gplus</a></li>
+                                             <li><a href="javascript:;" class="mail">Email</a></li>
+                                        </ul>
+                                        <div class="clear"></div>
+                                    </div>
+                                	
+                                </div>
+                                <span>22 Sept. 2014</span>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                          <div class="clear"></div>
+                    </div>
+                    <div class="itemWrap">
+                    	<div class="topicImageContainer">
+                        	<img src="../images/solid-partnership.jpg" />
+                        </div>
+                        <div class="description">
+                            <div class="topicHeader">
+                                21 Things Indians Say While Watching Cricket
+                            </div>
+                            <div class="topicSummary">
+                                <p>Cricket. A sport everywhere else in the world, but a religion in India. A lot of people play it, a lot more watch it, but every single Indian talks about it... <a class="readMore" href="series-landing.html">Read More</a></p>
+                            </div>
+                            <div class="mediaIconHolder">
+                                <div class="mediaIcon video">
+                                	<img src="../images/video-pink-icon.png" />
+                                </div>
+                                <div class="mediaIcon more">
+                                    <div class="socialShare">
+                                        <div class="shareIcon"></div>
+                                        <ul class="postButton">
+                                            <li><a href="javascript:;" class="fb">facebook</a></li>
+                                             <li><a href="javascript:;" class="tw">Twitter</a></li>
+                                             <li><a href="javascript:;" class="gplus">Gplus</a></li>
+                                             <li><a href="javascript:;" class="mail">Email</a></li>
+                                        </ul>
+                                        <div class="clear"></div>
+                                    </div>
+                                </div>
+                                <span>22 Sept. 2014</span>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                          <div class="clear"></div>
+                    </div>
+                    <div class="itemWrap">
+                    	<div class="topicImageContainer">
+                        	<img src="../images/cookies-basket.jpg" />
+                        </div>
+                        <div class="description">
+                            <div class="topicHeader">
+                                20 Delectable Dishes From Rajasthan That Will Make You Drool Instantly
+                            </div>
+                            <div class="topicSummary">
+                                <p>Rajasthan, the land of Maharajas, is famous for its rich culture. But what makes the state distinctive and popular is its cuisine... <a class="readMore" href="series-landing.html">Read More</a></p>
+                            </div>
+                            <div class="mediaIconHolder">
+                                <div class="mediaIcon text">
+                                	<img src="../images/text-doc-icon.png" />
+                                </div>
+                                <div class="mediaIcon more">
+                                	    <div class="socialShare">
+                                        <div class="shareIcon"></div>
+                                        <ul class="postButton">
+                                            <li><a href="javascript:;" class="fb">facebook</a></li>
+                                             <li><a href="javascript:;" class="tw">Twitter</a></li>
+                                             <li><a href="javascript:;" class="gplus">Gplus</a></li>
+                                             <li><a href="javascript:;" class="mail">Email</a></li>
+                                        </ul>
+                                        <div class="clear"></div>
+                                    </div>
+                                </div>
+                                <span>22 Sept. 2014</span>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                          <div class="clear"></div>
+                    </div>
+            </div>
+            <div class="clear"></div>
+        	</div>
+        </section>
+        <section class="highlightedSection">
+            <div class="wrapper">
+                <div class="imageContainer">
+                    <img src="../images/highlight-img.jpg" />
+                    <div class="imageOverlay">
+                            <div class="rhsContainer">
+                                <h2>11 Reasons Why We Should Reconnect With Our Old Friends</h2>
+                                <p>India has no dearth of beautiful travel destinations. Some are more popular and more commercialized than others. That in no way implies that the lesser-known places have anything less to offer... <a href="series-landing.html">Read More</a></p>
+                                <span>24 Sept. 2014</span>
+                            </div>
+                            <div class="lhsContainer">
+                                <div class="videoContainer">
+                                    <img src="../images/play-icon.png" />
+                                </div>
+                                <div class="cameraContainer">
+                                   <div class="socialShare">
+                                        <div class="shareIcon"></div>
+                                        <ul class="postButton">
+                                            <li><a href="javascript:;" class="fb">facebook</a></li>
+                                             <li><a href="javascript:;" class="tw">Twitter</a></li>
+                                             <li><a href="javascript:;" class="gplus">Gplus</a></li>
+                                             <li><a href="javascript:;" class="mail">Email</a></li>
+                                        </ul>
+                                        <div class="clear"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="date">24 Sept. 2014</span>
+                            <div class="clear"></div>
+                        </div>
+                </div>
+            </div>
+        </section>
+        <section class="mustWatchSection content">
+        	<div class="wrapper">
+        	<h2>Must Watch</h2>
+            <div class="listed" id="masonry">
+                	<div class="itemWrap">
+                        <div class="masonryItemWrapper pattern">
+                            <div class="topicImageContainer">
+                                <img src="../images/skeleton.jpg" />
+                            </div>
+                            <div class="description">
+                                <div class="topicHeader">
+                                    30 Unusual Things And Places You Won’t Believe Existed In India
+                                </div>
+                                <div class="topicSummary">
+                                    <p>Travelling in India is like a roller-coaster ride, thrilling and unforgettable. India has something to offer to every traveller: scenic beauty, beaches... <a class="readMore" href="#">Read More</a></p>
+                                </div>
+                                <div class="mediaIconHolder">
+                                    <div class="mediaIcon video">
+                                        <img src="../images/video-pink-icon.png" />
+                                    </div>
+                                    <div class="mediaIcon more">
+                                      <div class="socialShare">
+                                        <div class="shareIcon"></div>
+                                        <ul class="postButton">
+                                            <li><a href="javascript:;" class="fb">facebook</a></li>
+                                             <li><a href="javascript:;" class="tw">Twitter</a></li>
+                                             <li><a href="javascript:;" class="gplus">Gplus</a></li>
+                                             <li><a href="javascript:;" class="mail">Email</a></li>
+                                        </ul>
+                                        <div class="clear"></div>
+                                    </div>
+                                    </div>
+                                    <span>22 Sept. 2014</span>
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="itemWrap">
+                    	<div class="masonryItemWrapper pattern">
+                            <div class="topicImageContainer">
+                                <img src="../images/statues.jpg" />
+                            </div>
+                            <div class="description">
+                                <div class="topicHeader">
+                                    15 Underrated Destinations In India Every Traveler Must Check Out
+                                </div>
+                                <div class="topicSummary">
+                                    <p>India has no dearth of beautiful travel destinations. Some are more popular and more commercialized than others... <a class="readMore" href="#">Read More</a></p>
+                                </div>
+                                <div class="mediaIconHolder">
+                                    <div class="mediaIcon video">
+                                        <img src="../images/camera-pink-icon.png" />
+                                    </div>
+                                    <div class="mediaIcon more">
+                                     <div class="socialShare">
+                                        <div class="shareIcon"></div>
+                                        <ul class="postButton">
+                                            <li><a href="javascript:;" class="fb">facebook</a></li>
+                                             <li><a href="javascript:;" class="tw">Twitter</a></li>
+                                             <li><a href="javascript:;" class="gplus">Gplus</a></li>
+                                             <li><a href="javascript:;" class="mail">Email</a></li>
+                                        </ul>
+                                        <div class="clear"></div>
+                                    </div>
+                                    </div>
+                                    <span>22 Sept. 2014</span>
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="itemWrap">
+                        <div class="masonryItemWrapper pattern">
+                            <div class="topicImageContainer">
+                                <img src="../images/old-shows.jpg" />
+                            </div>
+                            <div class="description">
+                                <div class="topicHeader">
+                                    10 TV Shows From The 90s We Really Miss Today
+                                </div>
+                                <div class="topicSummary">
+                                    <p>Many of us lament that the content dished out on Indian television nowadays is no match for the likes of ‘One Tree Hill’ or ‘Gilmore Girls’. But not very long ago... <a class="readMore" href="#">Read More</a></p>
+                                </div>
+                                <div class="mediaIconHolder">
+                                    <div class="mediaIcon video">
+                                        <img src="../images/video-pink-icon.png" />
+                                    </div>
+                                    <div class="mediaIcon more">
+                                     <div class="socialShare">
+                                        <div class="shareIcon"></div>
+                                        <ul class="postButton">
+                                            <li><a href="javascript:;" class="fb">facebook</a></li>
+                                             <li><a href="javascript:;" class="tw">Twitter</a></li>
+                                             <li><a href="javascript:;" class="gplus">Gplus</a></li>
+                                             <li><a href="javascript:;" class="mail">Email</a></li>
+                                        </ul>
+                                        <div class="clear"></div>
+                                    </div>
+                                    </div>
+                                    <span>22 Sept. 2014</span>
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="itemWrap">
+                    	<div class="masonryItemWrapper pattern">
+                            <div class="topicImageContainer">
+                                <img src="../images/makeover.jpg" />
+                            </div>
+                            <div class="description">
+                                <div class="topicHeader">
+                                    An Online Fashion Brand Did For Its Workers What It Does For Its Customers. They Couldn’t Be Happier
+                                </div>
+                                <div class="topicSummary">
+                                    <p>Travelling in India is like a roller-coaster ride, thrilling and unforgettable. India has something to offer to every traveller: scenic beauty, beaches... <a class="readMore" href="#">Read More</a></p>
+                                </div>
+                                <div class="mediaIconHolder">
+                                    <div class="mediaIcon video">
+                                        <img src="../images/camera-pink-icon.png" />
+                                    </div>
+                                    <div class="mediaIcon more">
+                                      <div class="socialShare">
+                                        <div class="shareIcon"></div>
+                                        <ul class="postButton">
+                                            <li><a href="javascript:;" class="fb">facebook</a></li>
+                                             <li><a href="javascript:;" class="tw">Twitter</a></li>
+                                             <li><a href="javascript:;" class="gplus">Gplus</a></li>
+                                             <li><a href="javascript:;" class="mail">Email</a></li>
+                                        </ul>
+                                        <div class="clear"></div>
+                                    </div>
+                                    </div>
+                                    <span>22 Sept. 2014</span>
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="itemWrap">
+                        <div class="masonryItemWrapper pattern">
+                            <div class="topicImageContainer">
+                                <img src="../images/sleepwalk.jpg" />
+                            </div>
+                            <div class="description">
+                                <div class="topicHeader">
+                                    16 Things You’ll Understand If You Are A Night Owl
+                                </div>
+                                <div class="topicSummary">
+                                    <p>Early to bed and early to rise may make one healthy, wealthy and wise, but you are a creature of the dark... <a class="readMore" href="#">Read More</a></p>
+                                </div>
+                                <div class="mediaIconHolder">
+                                    <div class="mediaIcon video">
+                                        <img src="../images/video-pink-icon.png" />
+                                    </div>
+                                    <div class="mediaIcon more">
+                                       <div class="socialShare">
+                                        <div class="shareIcon"></div>
+                                        <ul class="postButton">
+                                            <li><a href="javascript:;" class="fb">facebook</a></li>
+                                             <li><a href="javascript:;" class="tw">Twitter</a></li>
+                                             <li><a href="javascript:;" class="gplus">Gplus</a></li>
+                                             <li><a href="javascript:;" class="mail">Email</a></li>
+                                        </ul>
+                                        <div class="clear"></div>
+                                    </div>
+                                    </div>
+                                    <span>22 Sept. 2014</span>
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="itemWrap">
+                        <div class="masonryItemWrapper pattern">
+                            <div class="topicImageContainer">
+                                <img src="../images/verbal-rape.jpg" />
+                            </div>
+                            <div class="description">
+                                <div class="topicHeader">
+                                    There Is One Kind Of Rape Which Is Still Legal In India. And It’s Happening Right Now
+                                </div>
+                                <div class="topicSummary">
+                                    <p>Many of us lament that the content dished out on Indian television nowadays is no match for the likes of ‘One Tree Hill’ or ‘Gilmore Girls’. But not very long ago... <a class="readMore" href="#">Read More</a></p>
+                                </div>
+                                <div class="mediaIconHolder">
+                                    <div class="mediaIcon video">
+                                        <img src="../images/camera-pink-icon.png" />
+                                    </div>
+                                    <div class="mediaIcon more">
+                                       <div class="socialShare">
+                                        <div class="shareIcon"></div>
+                                        <ul class="postButton">
+                                            <li><a href="javascript:;" class="fb">facebook</a></li>
+                                             <li><a href="javascript:;" class="tw">Twitter</a></li>
+                                             <li><a href="javascript:;" class="gplus">Gplus</a></li>
+                                             <li><a href="javascript:;" class="mail">Email</a></li>
+                                        </ul>
+                                        <div class="clear"></div>
+                                    </div>
+                                    </div>
+                                    <span>22 Sept. 2014</span>
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="itemWrap">
+                        <div class="masonryItemWrapper pattern">
+                            <div class="topicImageContainer">
+                                <img src="../images/street-art.jpg" />
+                            </div>
+                            <div class="description">
+                                <div class="topicHeader">
+                                    20 Awesome Pieces of Street Art That You Won’t Believe Exist In Delhi
+                                </div>
+                                <div class="topicSummary">
+                                    <p>Delhi is a city of ironies. It's dotted with locales where the urban meets the rural. Shahpur Jat is one such amalgamation... <a class="readMore" href="#">Read More</a></p>
+                                </div>
+                                <div class="mediaIconHolder">
+                                    <div class="mediaIcon video">
+                                        <img src="../images/video-pink-icon.png" />
+                                    </div>
+                                    <div class="mediaIcon more">
+                                     <div class="socialShare">
+                                        <div class="shareIcon"></div>
+                                        <ul class="postButton">
+                                            <li><a href="javascript:;" class="fb">facebook</a></li>
+                                             <li><a href="javascript:;" class="tw">Twitter</a></li>
+                                             <li><a href="javascript:;" class="gplus">Gplus</a></li>
+                                             <li><a href="javascript:;" class="mail">Email</a></li>
+                                        </ul>
+                                        <div class="clear"></div>
+                                    </div>
+                                    </div>
+                                    <span>22 Sept. 2014</span>
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="itemWrap">
+                        <div class="masonryItemWrapper pattern">
+                            <div class="topicImageContainer">
+                                <img src="../images/dosa-types.jpg" />
+                            </div>
+                            <div class="description">
+                                <div class="topicHeader">
+                                    20 Dosas That Will Make You Go Om Nom Nom
+                                </div>
+                                <div class="topicSummary">
+                                    <p>Dosa is a fermented crepe or pancake made from rice batter and black lentils. It is a staple dish in the South Indian states... <a class="readMore" href="#">Read More</a></p>
+                                </div>
+                                <div class="mediaIconHolder">
+                                    <div class="mediaIcon video">
+                                        <img src="../images/video-pink-icon.png" />
+                                    </div>
+                                    <div class="mediaIcon more">
+                                     <div class="socialShare">
+                                        <div class="shareIcon"></div>
+                                        <ul class="postButton">
+                                            <li><a href="javascript:;" class="fb">facebook</a></li>
+                                             <li><a href="javascript:;" class="tw">Twitter</a></li>
+                                             <li><a href="javascript:;" class="gplus">Gplus</a></li>
+                                             <li><a href="javascript:;" class="mail">Email</a></li>
+                                        </ul>
+                                        <div class="clear"></div>
+                                    </div>
+                                    </div>
+                                    <span>22 Sept. 2014</span>
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="itemWrap">
+                        <div class="masonryItemWrapper pattern">
+                            <div class="topicImageContainer">
+                                <img src="../images/players.jpg" />
+                            </div>
+                            <div class="description">
+                                <div class="topicHeader">
+                                    29 Invaluable Life Lessons That Sports Teach Us
+                                </div>
+                                <div class="topicSummary">
+                                    <p>There are many life lessons you can learn by playing sports. Apart from the exercise, the fun factor and the competitive spirit... <a class="readMore" href="#">Read More</a></p>
+                                </div>
+                                <div class="mediaIconHolder">
+                                    <div class="mediaIcon video">
+                                        <img src="../images/camera-pink-icon.png" />
+                                    </div>
+                                    <div class="mediaIcon more">
+                                    <div class="socialShare">
+                                        <div class="shareIcon"></div>
+                                        <ul class="postButton">
+                                            <li><a href="javascript:;" class="fb">facebook</a></li>
+                                             <li><a href="javascript:;" class="tw">Twitter</a></li>
+                                             <li><a href="javascript:;" class="gplus">Gplus</a></li>
+                                             <li><a href="javascript:;" class="mail">Email</a></li>
+                                        </ul>
+                                        <div class="clear"></div>
+                                    </div>
+                                    </div>
+                                    <span>22 Sept. 2014</span>
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <div class="loadMore">
+            	<a href="series-landing.html">Load More</a>
+            </div>
+        </div>
+        </section>
+    </div>
+    </div>
+</body>
+</html>

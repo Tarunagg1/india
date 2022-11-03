@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>101 India About Us Page</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
+	<link type="text/css" rel="stylesheet" href="../css/style.css"  media="screen,projection"/>
+	<script type="text/javascript" src="../js/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/masonry.pkgd.min.js"></script>
+    <script type="text/javascript" src="../js/materialize.min.js"></script>
+
+    <script type="text/javascript">
+    	$(document).ready(function(){
+			mobileMenu();
+		    searchIcon();
+		    accordionSlide();
+			menuDropDown();
+
+		})
+
+		// $(window).load(function(){
+		// 	var container = document.querySelector('.masonryContent');
+		// 	var msnry = new Masonry( container, {
+		// 	  // options...
+		// 	  itemSelector: '.item'
+		// 	});
+			
+			
+		// })
+
+		$(window).resize(function(){
+			mobileMenu();
+		})
+
+    	function mobileMenu(){
+			if($(window).width() < 992){
+		    $('.button-collapse').sideNav({
+			  menuWidth: 260, // Default is 240
+			  edge: 'left', // Choose the horizontal origin
+			  closeOnClick: false // Closes side-nav on <a> clicks, useful for Angular/Meteor
+			});
+			}else{
+				$('.side-nav').removeAttr('style');
+				$('#sidenav-overlay').remove();	
+			}
+		}
+
+		function searchIcon(){
+			$(".searchIcon").click(function () {
+				$('.search').toggleClass('hide');
+				$('.searchCross').toggleClass('show');
+		        $(".searchArea input, .searchInput").toggleClass('widthInput');
+		    });  
+		}
+
+
+		function accordionSlide(){
+			$('.collapsible').collapsible({
+			  accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+			});
+		}
+		
+		function menuDropDown(){
+			$('.other .menuLink').dropdown({
+				  inDuration: 300,
+				  outDuration: 225,
+				  constrain_width: true, // Does not change width of dropdown to that of the activator
+				  hover: true, // Activate on click
+				  alignment: 'left', // Aligns dropdown to left or right edge (works with constrain_width)
+				  gutter: 0, // Spacing from edge
+				  belowOrigin: true // Displays dropdown below the button
+				}
+			  );
+		}
+
+    </script>
+
+    
+</head>
+<body class="homePg">
+	<div class="page">
+        <div class="logoWrap colLhs">
+            <a href="javascript:;"><img src="../images/101-logo.png"></a>
+            <div class="logoTxt">Stories for<br/>a New India</div>
+        </div>
+		<div class="containerwrap">
+			<div class="menuWrap">
+				<header>
+					<div class="headerwrap">
+						<!-- header -->
+						<nav>
+                            <div class="menuList">
+                                <ul id="slide-out" class="side-nav">
+                                    <li class="menuItems funny">
+                                        <a class="menuLink menuLink1 waves-effect" href="javascript:;">FUNNY</a>
+                                    </li>
+                                    <li class="menuItems loveSex">
+                                        <a class="menuLink menuLink2 waves-effect" href="javascript:;">LOVE & SEX</a>
+                                    </li>
+                                    <li class="menuItems people">
+                                        <a class="menuLink menuLink3 waves-effect" href="javascript:;">PEOPLE</a>
+                                    </li>
+                                    <li class="menuItems travelFood">
+                                        <a class="menuLink menuLink4 waves-effect" href="javascript:;">TRAVEL & FOOD</a>
+                                    </li>
+                                    <li class="menuItems fiction">
+                                        <a class="menuLink menuLink5 waves-effect" href="javascript:;">FICTION</a>
+                                    </li>
+                                    <li class="menuItems music">
+                                        <a class="menuLink menuLink6 waves-effect" href="javascript:;">MUSIC</a>
+                                    </li>
+                                    <li class="menuItems brief">
+                                        <a class="menuLink menuLink7 waves-effect" href="javascript:;">THE BRIEF</a>
+                                    </li>
+                                    <li class="menuItems other">
+                                        <a class='menuLink menuLink8 waves-effect' href='javascript:;' data-activates='dropdown1'>OTHER</a>
+                                        <!-- Dropdown Structure -->
+                                          <ul id='dropdown1' class='dropdown-content'>
+                                            <li><a href="javascript:;" class="waves-effect">CONTACT</a></li>
+                                            <li><a href="javascript:;" class="waves-effect">TERMS</a></li>
+                                            <li><a href="javascript:;" class="waves-effect">PRIVACY</a></li>
+                                            <li><a href="javascript:;" class="waves-effect">NEWSLETTER</a></li>
+                                          </ul>
+                                    </li>
+                                    <li class="menuItems about">
+                                        <ul class="collapsible" data-collapsible="accordion">
+                                            <li>
+                                              <div class="collapsible-header">
+                                                <a class="menuLink menuLink9 waves-effect" href="javascript:;">ABOUT</a></div>
+                                              <div class="collapsible-body">
+                                                <ul>
+                                                    <li>
+                                                        <a href="javascript:;" class="waves-effect">CONTACT</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:;" class="waves-effect">TERMS</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:;" class="waves-effect">PRIVACY</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:;" class="waves-effect">NEWSLETTER</a>
+                                                    </li>
+                                                </ul>
+                                              </div>
+                                            </li>
+                                          </ul>
+                                    </li>
+                                  </ul>
+                                  <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+                            </div>
+                        </nav>
+						<div class="socialIconWrap">
+							<ul>
+								<li>
+									<div class="searchArea">
+										<a class="icons searchIcon" href="javascript:;">
+											<i class="mdi-action-search search"></i>
+											<i class="mdi-navigation-close searchCross" style="display:none"></i>
+										</a>
+										<div class="searchInput">
+											<input placeholder="SEARCH" name="user_id" id="userId" type="text" class="txtBox">
+										</div>
+										
+									</div>
+								</li>
+								<li>
+									<a class="icons" href="javascript:;"><img src="../images/fb-logo-plain.png"></a>
+								</li>
+								<li>
+									<a class="icons" href="javascript:;"><img src="../images/twitter-logo-plain.png"></a>
+								</li>
+								<li>
+									<a class="icons" href="javascript:;"><img src="../images/insta-logo-plain.png"></a>
+								</li>
+								<li>
+									<a class="icons" href="javascript:;"><img src="../images/youtube-logo-plain.png"></a>
+								</li>
+								<li>
+									<a class="icons" href="javascript:;"><img src="../images/gplus-logo-plain.png"></a>
+								</li>
+								<li>
+									<a class="icons" href="javascript:;"><img src="../images/rss-logo-plain.png"></a>
+								</li>
+							</ul>
+						</div>
+                        <div class="clear"></div>
+					</div>
+				</header>
+				<div class="mobileViewHeader">
+					<div class="mobileSiteLogo"><a href="javascript:;"><img src="../images/mobile-site-logo.png"></a></div>
+					<div class="searchArea">
+						<a class="icons searchIcon" href="javascript:;">
+							<i class="mdi-action-search search"></i>
+							<i class="mdi-navigation-close searchCross" style="display:none"></i>
+						</a>
+						<div class="searchInput">
+							<input placeholder="SEARCH" name="user_id" id="userId" type="text" class="txtBox">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="contentWrap contentSlide">
+				<div class="pageBanner staticPages">
+					<div class="pgTitle"><h1>ABOUT US</h1></div>
+					<div class="aboutContent">
+						<p>101 India is an online youth focused content portal serving entertaining videos, photo essays, blogs and listicles aimed at connecting urban Indian audiences. Created by a team of youth television experts, film makers, writers, bloggers, animators, designers to give you a mix of humor, travel, people profiles, alternate sports, music and food. A pot boiler of everything that makes India the crazy but delightful circus that it is.  We support the underdog, we believe in diversity. We don’t take ourselves too seriously and are not big fans of censorship or the moral police. We believe in embracing our differences and celebrating them because this keeps us unique and diverse. Satire and humor are powerful tools for social change and social commentary and we use this in our content to create movements for change. We want to encourage a freer flow of information and dialogue and our human stories are based on culture, sub culture and counter culture.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="colRhs">
+				<!-- empty column -->
+			</div>
+			<div class="clear"></div>
+		<!-- containerwrap ends -->
+		
+	</div>
+    <footer>
+	    	<div class="footerContent">
+	            <ul>
+	                <li><a href="javascript:void(1);">ABOUT US</a></li>
+	                <li><a href="javascript:void(1);">CONTACT US</a></li>
+	                <li><a href="javascript:void(1);">TERMS</a></li>
+	                <li><a href="javascript:void(1);">PRIVACY</a></li>
+	                <li><a href="javascript:void(1);">NEWSLETTER</a></li>
+	                <li><a href="javascript:void(1);">&copy; 101 INDIA DIGITAL PVT.LTD</a></li>
+	                <li><a href="javascript:void(1);">ALL RIGHTS RESERVED</a></li>
+	            </ul>
+	        </div>
+	    </footer>
+</body>
+</html>

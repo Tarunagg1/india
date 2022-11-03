@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>101 India Home Page</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
+	<link type="text/css" rel="stylesheet" href="../css/style.css"  media="screen,projection"/>
+	<script type="text/javascript" src="../js/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/masonry.pkgd.min.js"></script>
+    <script type="text/javascript" src="../js/materialize.min.js"></script>
+
+    <script type="text/javascript">
+    	$(document).ready(function(){
+			mobileMenu();
+		    searchIcon();
+		    accordionSlide();
+			menuDropDown();
+
+// article page script
+			$('.addIconsBtn').on('click',function(){
+				$('.socialHidden').fadeIn();
+			})
+
+			$('.closeIconBtn').on('click',function(){
+				$('.socialHidden').fadeOut();
+			})
+
+			
+
+			var siderWidth = $('.rhsContent').width();
+
+  $( window ).scroll(function() {
+      var sidebarpos = parseInt($(window).scrollTop()),
+          windowhght = parseInt($(window).height());
+
+            // console.log(sidebarpos);
+
+            var sidebarleft = parseInt($(".rhsContent").offset().left), 
+
+            sidebarHght=parseInt($(".rhsContent").outerHeight()),
+
+            sidebartop=parseInt($(".articleContent").offset().top),
+
+            bodyhght = parseInt($("body").height());
+
+
+            if (sidebarpos > (sidebarHght + sidebartop) - windowhght && ($(window).width()>800)) {
+                    $(".rhsContent").css({
+                        "position":"fixed",
+                        "left":sidebarleft,
+                        "width": siderWidth + 'px',
+                        "top":-(sidebarHght-windowhght+20)
+                    });
+            } else {
+                    $(".rhsContent").css({
+                        "position":"relative",
+                        "left":0,
+                        "top":0
+                    });
+            }
+           
+    });
+
+
+
+
+// article page script
+
+
+		})
+
+		$(window).load(function(){
+			var container = document.querySelector('.masonryContent');
+			var msnry = new Masonry( container, {
+			  // options...
+			  itemSelector: '.item'
+			});
+			
+			
+		})
+
+		$(window).resize(function(){
+			mobileMenu();
+			
+			
+		})
+
+    	function mobileMenu(){
+			if($(window).width() < 992){
+		    $('.button-collapse').sideNav({
+			  menuWidth: 260, // Default is 240
+			  edge: 'left', // Choose the horizontal origin
+			  closeOnClick: false // Closes side-nav on <a> clicks, useful for Angular/Meteor
+			});
+			}else{
+				$('.side-nav').removeAttr('style');
+				$('#sidenav-overlay').remove();	
+			}
+		}
+
+		function searchIcon(){
+			$(".searchIcon").click(function () {
+				$('.search').toggleClass('hide');
+				$('.searchCross').toggleClass('show');
+		        $(".searchArea input, .searchInput").toggleClass('widthInput');
+		    });  
+		}
+
+
+		function accordionSlide(){
+			$('.collapsible').collapsible({
+			  accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+			});
+		}
+		
+		function menuDropDown(){
+			$('.other .menuLink').dropdown({
+				  inDuration: 300,
+				  outDuration: 225,
+				  constrain_width: true, // Does not change width of dropdown to that of the activator
+				  hover: true, // Activate on click
+				  alignment: 'left', // Aligns dropdown to left or right edge (works with constrain_width)
+				  gutter: 0, // Spacing from edge
+				  belowOrigin: true // Displays dropdown below the button
+				}
+			  );
+		}
+
+    </script>
+</head>
+<body class="homePg">
+	<div class="page">
+        <div class="logoWrap colLhs">
+            <a href="javascript:;"><img src="../images/101-logo.png"></a>
+            <div class="logoTxt">Stories for<br/>a New India</div>
+        </div>
+		<div class="containerwrap">
+			<div class="menuWrap">
+				<header>
+					<div class="headerwrap">
+						<!-- header -->
+						<nav>
+                            <div class="menuList">
+                                <ul id="slide-out" class="side-nav">
+                                    <li class="menuItems funny">
+                                        <a class="menuLink menuLink1 waves-effect" href="javascript:;">FUNNY</a>
+                                    </li>
+                                    <li class="menuItems loveSex">
+                                        <a class="menuLink menuLink2 waves-effect" href="javascript:;">LOVE & SEX</a>
+                                    </li>
+                                    <li class="menuItems people">
+                                        <a class="menuLink menuLink3 waves-effect" href="javascript:;">PEOPLE</a>
+                                    </li>
+                                    <li class="menuItems travelFood">
+                                        <a class="menuLink menuLink4 waves-effect" href="javascript:;">TRAVEL & FOOD</a>
+                                    </li>
+                                    <li class="menuItems fiction">
+                                        <a class="menuLink menuLink5 waves-effect" href="javascript:;">FICTION</a>
+                                    </li>
+                                    <li class="menuItems music">
+                                        <a class="menuLink menuLink6 waves-effect" href="javascript:;">MUSIC</a>
+                                    </li>
+                                    <li class="menuItems brief">
+                                        <a class="menuLink menuLink7 waves-effect" href="javascript:;">THE BRIEF</a>
+                                    </li>
+                                    <li class="menuItems other">
+                                        <a class='menuLink menuLink8 waves-effect' href='javascript:;' data-activates='dropdown1'>OTHER</a>
+                                        <!-- Dropdown Structure -->
+                                          <ul id='dropdown1' class='dropdown-content'>
+                                            <li><a href="javascript:;" class="waves-effect">CONTACT</a></li>
+                                            <li><a href="javascript:;" class="waves-effect">TERMS</a></li>
+                                            <li><a href="javascript:;" class="waves-effect">PRIVACY</a></li>
+                                            <li><a href="javascript:;" class="waves-effect">NEWSLETTER</a></li>
+                                          </ul>
+                                    </li>
+                                    <li class="menuItems about">
+                                        <ul class="collapsible" data-collapsible="accordion">
+                                            <li>
+                                              <div class="collapsible-header">
+                                                <a class="menuLink menuLink9 waves-effect" href="javascript:;">ABOUT</a></div>
+                                              <div class="collapsible-body">
+                                                <ul>
+                                                    <li>
+                                                        <a href="javascript:;" class="waves-effect">CONTACT</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:;" class="waves-effect">TERMS</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:;" class="waves-effect">PRIVACY</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:;" class="waves-effect">NEWSLETTER</a>
+                                                    </li>
+                                                </ul>
+                                              </div>
+                                            </li>
+                                          </ul>
+                                    </li>
+                                  </ul>
+                                  <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+                            </div>
+                        </nav>
+						<div class="socialIconWrap">
+							<ul>
+								<li>
+									<div class="searchArea">
+										<a class="icons searchIcon" href="javascript:;">
+											<i class="mdi-action-search search"></i>
+											<i class="mdi-navigation-close searchCross" style="display:none"></i>
+										</a>
+										<div class="searchInput">
+											<input placeholder="SEARCH" name="user_id" id="userId" type="text" class="txtBox">
+										</div>
+										
+									</div>
+								</li>
+								<li>
+									<a class="icons" href="javascript:;"><img src="../images/fb-logo-plain.png"></a>
+								</li>
+								<li>
+									<a class="icons" href="javascript:;"><img src="../images/twitter-logo-plain.png"></a>
+								</li>
+								<li>
+									<a class="icons" href="javascript:;"><img src="../images/insta-logo-plain.png"></a>
+								</li>
+								<li>
+									<a class="icons" href="javascript:;"><img src="../images/youtube-logo-plain.png"></a>
+								</li>
+								<li>
+									<a class="icons" href="javascript:;"><img src="../images/gplus-logo-plain.png"></a>
+								</li>
+								<li>
+									<a class="icons" href="javascript:;"><img src="../images/rss-logo-plain.png"></a>
+								</li>
+							</ul>
+						</div>
+                        <div class="clear"></div>
+					</div>
+				</header>
+				<div class="mobileViewHeader">
+					<div class="mobileSiteLogo"><a href="javascript:;"><img src="../images/mobile-site-logo.png"></a></div>
+					<div class="searchArea">
+						<a class="icons searchIcon" href="javascript:;">
+							<i class="mdi-action-search search"></i>
+							<i class="mdi-navigation-close searchCross" style="display:none"></i>
+						</a>
+						<div class="searchInput">
+							<input placeholder="SEARCH" name="user_id" id="userId" type="text" class="txtBox">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="contentWrap contentSlide">
+				<div class="pageBanner article">
+					<img class="bannerImg" src="../images/article-banner.jpg">
+					<div class="articleContent">
+                    	<div class="lhsContent">
+                            <div class="breadCrumbs">
+                                <ul>
+                                    <li><a>TRAVEL &amp; FOOD >> </a></li>
+                                    <li><a>Khos Goes</a></li>
+                                </ul>
+                            </div>
+                            <div class="articleSummary">
+                            	<h2><a>TRAVEL &amp; FOOD</a></h2>
+                                <div class="metaDate">March 10, 2015</div>
+                                <p>Enroute to picking up his brother from an Engineering college in Manipal, Khos makes a short stopover in Hampi and discovers a whole new way to chill.</p>
+                            </div>
+                            <div class="articleWrap">
+                            	<ul>
+                                	<li>
+                                    	<h3>Day1:</h3>
+                                        <p>A 4 hour bus ride, a 1 hour rickshaw ride and a 12 hour bus ride. My journey from Mumbai to Hampi was almost as long as my stay there.</p>
+										<img src="../images/day1.jpg" />
+                                        <div class="source">The Monkey Rocks of Hampi</div>
+                                    </li>
+                                    <li>
+                                    	<h3>Day2:</h3>
+                                        <p>A 4 hour bus ride, a 1 hour rickshaw ride and a 12 hour bus ride. My journey from Mumbai to Hampi was almost as long as my stay there.</p>
+										<img src="../images/day2.jpg" />
+                                        <div class="source">The Monkey Rocks of Hampi</div>
+                                    </li>
+                                    <li>
+                                    	<h3>Day3:</h3>
+                                        <p>A 4 hour bus ride, a 1 hour rickshaw ride and a 12 hour bus ride. My journey from Mumbai to Hampi was almost as long as my stay there.</p>
+										<img src="../images/day3.jpg" />
+                                        <div class="source">The Monkey Rocks of Hampi</div>
+                                    </li>
+                                    <li>
+                                    	<h3>Day4:</h3>
+                                        <p>A 4 hour bus ride, a 1 hour rickshaw ride and a 12 hour bus ride. My journey from Mumbai to Hampi was almost as long as my stay there.</p>
+										<img src="../images/day4.jpg" />
+                                        <div class="source">The Monkey Rocks of Hampi</div>
+                                    </li>
+                                    <li>
+                                    	<h3>Day5:</h3>
+                                        <p>A 4 hour bus ride, a 1 hour rickshaw ride and a 12 hour bus ride. My journey from Mumbai to Hampi was almost as long as my stay there.</p>
+										<img src="../images/day5.jpg" />
+                                        <div class="source">The Monkey Rocks of Hampi</div>
+                                    </li>
+                                    <li>
+                                    	<h3>Day6:</h3>
+                                        <p>Life in Hampi is very different compared to the hectic pace of the underpaid job I'm in back home.Time passes slowly. There is a stillness - a deep resonant silence amplified by the ancient looming presence of the boulders in this unique landscape. I felt like I truly connected with nature.Hippie Fever was catching up with me – a pleasant change from the dengue fever that I was down with in Mumbai. I did a good job of blending in with my big beard and oversized glasses: I was at one with the hippies on Hippie Island. A New Age Hippie in tune with the ghosts of hippies past.</p>
+										<img src="../images/day6.jpg" />
+                                        <div class="source">The Monkey Rocks of Hampi</div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="rhsContent">
+                        	<div class="socialContent">
+                            		<div class="socialIconsContainer">
+                            			<div class="socialVisible">
+                            				<ul>
+	                                            <li><a href="javascript:;"><img src="../images/fb-101.png" /></a></li>
+	                                            <li><a href="javascript:;"><img src="../images/twitter-101.png" /></a></li>
+	                                            <li><a href="javascript:;"><img src="../images/gplus-101.png" /></a></li>
+	                                            <li><a href="javascript:;"><img src="../images/message-101.png" /></a></li>
+	                                            <li><a class="addIconsBtn" href="javascript:;"><i class="mdi-content-add-circle"></i></a></li>
+	                                        </ul>
+                            			</div>
+                                        <div class="socialHidden" style="display: none;">
+                                        	<div class="shareTxt">
+                                    			<span class="share">SHARE</span>
+                                            	<a class="closeIconBtn" href="javascript:;"><i class="mdi-navigation-cancel"></i></a>
+                                            	<div class="clear"></div>
+                                    		</div>
+                                        	<ul>
+	                                            <li><a href="javascript:;"><img src="../images/reddit-social-101.png" /></a></li>
+	                                            <li><a href="javascript:;"><img src="../images/pinterst-social-101.png" /></a></li>
+	                                            <li><a href="javascript:;"><img src="../images/tumblr-social-101.png" /></a></li>
+	                                            <li><a href="javascript:;"><img src="../images/delicious-social-101.png" /></a></li>
+	                                            <li><a href="javascript:;"><img src="../images/digg-social-101.png" /></a></li>
+	                                            <li><a href="javascript:;"><img src="../images/top-odkazy-social-101.png" /></a></li>
+	                                            <li><a href="javascript:;"><img src="../images/i-social-101.png" /></a></li>
+	                                            <li><a href="javascript:;"><img src="../images/linkedIn-101.png" /></a></li>
+	                                            <li><a href="javascript:;"><img src="../images/notes-101.png" /></a></li>
+	                                        </ul>
+                                        </div>
+                                    </div>
+                                    <div class="viewCount">800 Views</div>
+                            </div>
+                            <div class="popularSection sidebar">
+                            	<h2 class="popTitle">Most Popular</h2>
+                                <div class="popularContent">
+                                	<ul>
+                                		<li class="popularItems">
+                                			<div class="dataContainer">
+								                <div class="imageContent">
+									            	<div class="metaDate"><span>Feb 22, 2015</span></div>
+									                <div class="categoryVal funny">Funny</div>
+								                	<a class="detailLink" href="javascript:void(1);">
+								                        <img class="imgpost" src="../images/sample-img.jpg">
+								                    </a>
+								                        <div class="iconWrap">
+								                            <img class="play" src="../images/video-play-icon.png"><span>05:05</span>
+								                        </div>
+								                </div>
+								                <div class="summary">
+								                	<h2>This man would rather date his balance sheet than a woman.</h2>
+								                </div>
+								                <div class="clear"></div>
+								            </div>
+                                		</li>
+                                		<li class="popularItems">
+                                			<div class="dataContainer">
+								                <div class="imageContent">
+									            	<div class="metaDate"><span>Feb 22, 2015</span></div>
+									                <div class="categoryVal funny">Funny</div>
+								                	<a class="detailLink" href="javascript:void(1);">
+								                        <img class="imgpost" src="../images/sample-img.jpg">
+								                    </a>
+								                        <div class="iconWrap">
+								                            <img class="play" src="../images/video-play-icon.png"><span>05:05</span>
+								                        </div>
+								                </div>
+								                <div class="summary">
+								                	<h2>This man would rather date his balance sheet than a woman.</h2>
+								                </div>
+								                <div class="clear"></div>
+								            </div>
+                                		</li>
+                                		<li class="popularItems">
+                                			<div class="dataContainer">
+								                <div class="imageContent">
+									            	<div class="metaDate"><span>Feb 22, 2015</span></div>
+									                <div class="categoryVal funny">Funny</div>
+								                	<a class="detailLink" href="javascript:void(1);">
+								                        <img class="imgpost" src="../images/sample-img.jpg">
+								                    </a>
+								                        <div class="iconWrap">
+								                            <img class="play" src="../images/video-play-icon.png"><span>05:05</span>
+								                        </div>
+								                </div>
+								                <div class="summary">
+								                	<h2>This man would rather date his balance sheet than a woman.</h2>
+								                </div>
+								                <div class="clear"></div>
+								            </div>
+                                		</li>
+                                		<li class="popularItems">
+                                			<div class="dataContainer">
+								                <div class="imageContent">
+									            	<div class="metaDate"><span>Feb 22, 2015</span></div>
+									                <div class="categoryVal funny">Funny</div>
+								                	<a class="detailLink" href="javascript:void(1);">
+								                        <img class="imgpost" src="../images/sample-img.jpg">
+								                    </a>
+								                        <div class="iconWrap">
+								                            <img class="play" src="../images/video-play-icon.png"><span>05:05</span>
+								                        </div>
+								                </div>
+								                <div class="summary">
+								                	<h2>This man would rather date his balance sheet than a woman.</h2>
+								                </div>
+								                <div class="clear"></div>
+								            </div>
+                                		</li>
+                                		<li class="popularItems">
+                                			<div class="dataContainer">
+								                <div class="imageContent">
+									            	<div class="metaDate"><span>Feb 22, 2015</span></div>
+									                <div class="categoryVal funny">Funny</div>
+								                	<a class="detailLink" href="javascript:void(1);">
+								                        <img class="imgpost" src="../images/sample-img.jpg">
+								                    </a>
+								                        <div class="iconWrap">
+								                            <img class="play" src="../images/video-play-icon.png"><span>05:05</span>
+								                        </div>
+								                </div>
+								                <div class="summary">
+								                	<h2>This man would rather date his balance sheet than a woman.</h2>
+								                </div>
+								                <div class="clear"></div>
+								            </div>
+                                		</li>
+                                	</ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="relatedVideosSection">
+                        	<div class="queueTitle"><h2>FROM THE SAME SERIES</h2></div>
+                            <ul>
+                            	<li>
+                                	<a href="#">
+                                            <div class="videoQueue">
+                                                <img src="../images/video-sample-2.jpg">
+                                                <span class="play"></span>
+                                            </div>
+                                        <div class="queueDesc">
+                                            <h2>Sushant &amp; the art of dating.</h2>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </a>
+                                </li>
+                                <li>
+                                	<a href="#">
+                                            <div class="videoQueue">
+                                                <img src="../images/video-sample-2.jpg">
+                                                <span class="play"></span>
+                                            </div>
+                                        <div class="queueDesc">
+                                            <h2>Sushant &amp; the art of dating.</h2>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </a>
+                                </li>
+                                <li>
+                                	<a href="#">
+                                            <div class="videoQueue">
+                                                <img src="../images/video-sample-2.jpg">
+                                                <span class="play"></span>
+                                            </div>
+                                        <div class="queueDesc">
+                                            <h2>Sushant &amp; the art of dating.</h2>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </a>
+                                </li>
+                                <li>
+                                	<a href="#">
+                                            <div class="videoQueue">
+                                                <img src="../images/video-sample-2.jpg">
+                                                <span class="play"></span>
+                                            </div>
+                                        <div class="queueDesc">
+                                            <h2>Sushant &amp; the art of dating.</h2>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </a>
+                                </li>
+                                <li>
+                                	<a href="#">
+                                            <div class="videoQueue">
+                                                <img src="../images/video-sample-2.jpg">
+                                                <span class="play"></span>
+                                            </div>
+                                        <div class="queueDesc">
+                                            <h2>Sushant &amp; the art of dating.</h2>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </a>
+                                </li>
+                           </ul>
+                    </div>
+				</div>
+			</div>
+		</div>
+		<div class="colRhs">
+				<!-- empty column -->
+			</div>
+			<div class="clear"></div>
+		<!-- containerwrap ends -->
+		
+	</div>
+    <footer>
+	    	<div class="footerContent">
+	            <ul>
+	                <li><a href="javascript:void(1);">ABOUT US</a></li>
+	                <li><a href="javascript:void(1);">CONTACT US</a></li>
+	                <li><a href="javascript:void(1);">TERMS</a></li>
+	                <li><a href="javascript:void(1);">PRIVACY</a></li>
+	                <li><a href="javascript:void(1);">NEWSLETTER</a></li>
+	                <li><a href="javascript:void(1);">&copy; 101 INDIA DIGITAL PVT.LTD</a></li>
+	                <li><a href="javascript:void(1);">ALL RIGHTS RESERVED</a></li>
+	            </ul>
+	        </div>
+	    </footer>
+</body>
+</html>

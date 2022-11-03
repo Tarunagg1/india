@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>101 India Search Results Page</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
+	<link type="text/css" rel="stylesheet" href="../css/style.css"  media="screen,projection"/>
+	<script type="text/javascript" src="../js/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/masonry.pkgd.min.js"></script>
+    <script type="text/javascript" src="../js/materialize.min.js"></script>
+
+    <script type="text/javascript">
+    	$(document).ready(function(){
+		    mobileMenu();
+		    searchIcon();
+		    accordionSlide();
+			menuDropDown();
+		})
+
+		$(window).load(function(){
+			var container = document.querySelector('.masonryContent');
+			var msnry = new Masonry( container, {
+			  // options...
+			  itemSelector: '.item'
+			});
+		})
+
+    	function mobileMenu(){
+		    $('#nav-toggle').click(function(){
+				$(this).toggleClass('active');
+				$(".contentSlide").toggleClass('slideDiv');
+		    });
+		}
+
+		function searchIcon(){
+			$(".searchIcon").click(function () {
+				$('.search').toggleClass('hide');
+				$('.searchCross').toggleClass('show');
+		        $(".searchArea input").fadeToggle('slow');
+		    });  
+		}
+
+
+		function accordionSlide(){
+			$('.collapsible').collapsible({
+			  accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+			});
+		}
+		
+		function menuDropDown(){
+			$('.other .menuLink').dropdown({
+				  inDuration: 300,
+				  outDuration: 225,
+				  constrain_width: false, // Does not change width of dropdown to that of the activator
+				  hover: false, // Activate on click
+				  alignment: 'left', // Aligns dropdown to left or right edge (works with constrain_width)
+				  gutter: 0, // Spacing from edge
+				  belowOrigin: true // Displays dropdown below the button
+				}
+			  );
+		}
+
+    </script>
+</head>
+<body class="searchList">
+	<div class="page">
+    	<div class="logoWrap colLhs">
+            <a href="javascript:;"><img src="../images/101-logo.png"></a>
+            <div class="logoTxt">Stories for<br/>a New India</div>
+        </div>
+		<div class="containerwrap">
+			<div class="menuWrap">
+				<header>
+					<div class="headerwrap">
+						<!-- header -->
+						<nav>
+                            <div class="menuList">
+                                <ul id="slide-out" class="side-nav">
+                                    <li class="menuItems funny">
+                                        <a class="menuLink menuLink1 waves-effect" href="javascript:;">FUNNY</a>
+                                    </li>
+                                    <li class="menuItems loveSex">
+                                        <a class="menuLink menuLink2 waves-effect" href="javascript:;">LOVE & SEX</a>
+                                    </li>
+                                    <li class="menuItems people">
+                                        <a class="menuLink menuLink3 waves-effect" href="javascript:;">PEOPLE</a>
+                                    </li>
+                                    <li class="menuItems travelFood">
+                                        <a class="menuLink menuLink4 waves-effect" href="javascript:;">TRAVEL & FOOD</a>
+                                    </li>
+                                    <li class="menuItems fiction">
+                                        <a class="menuLink menuLink5 waves-effect" href="javascript:;">FICTION</a>
+                                    </li>
+                                    <li class="menuItems music">
+                                        <a class="menuLink menuLink6 waves-effect" href="javascript:;">MUSIC</a>
+                                    </li>
+                                    <li class="menuItems brief">
+                                        <a class="menuLink menuLink7 waves-effect" href="javascript:;">THE BRIEF</a>
+                                    </li>
+                                    <li class="menuItems other">
+                                        <a class='menuLink menuLink8 waves-effect' href='javascript:;' data-activates='dropdown1'>OTHER</a>
+                                        <!-- Dropdown Structure -->
+                                          <ul id='dropdown1' class='dropdown-content'>
+                                            <li><a href="javascript:;" class="waves-effect">CONTACT</a></li>
+                                            <li><a href="javascript:;" class="waves-effect">TERMS</a></li>
+                                            <li><a href="javascript:;" class="waves-effect">PRIVACY</a></li>
+                                            <li><a href="javascript:;" class="waves-effect">NEWSLETTER</a></li>
+                                          </ul>
+                                    </li>
+                                    <li class="menuItems about">
+                                        <ul class="collapsible" data-collapsible="accordion">
+                                            <li>
+                                              <div class="collapsible-header">
+                                                <a class="menuLink menuLink9 waves-effect" href="javascript:;">ABOUT</a></div>
+                                              <div class="collapsible-body">
+                                                <ul>
+                                                    <li>
+                                                        <a href="javascript:;" class="waves-effect">CONTACT</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:;" class="waves-effect">TERMS</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:;" class="waves-effect">PRIVACY</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:;" class="waves-effect">NEWSLETTER</a>
+                                                    </li>
+                                                </ul>
+                                              </div>
+                                            </li>
+                                          </ul>
+                                    </li>
+                                  </ul>
+                                  <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+                            </div>
+                        </nav>
+						<div class="socialIconWrap">
+							<ul>
+								<li>
+									<div class="searchArea">
+										<a class="icons searchIcon" href="javascript:;">
+											<i class="mdi-action-search search"></i>
+											<i class="mdi-navigation-close searchCross" style="display:none"></i>
+										</a>
+										<div class="searchInput">
+											<input placeholder="SEARCH" name="user_id" id="userId" type="text" class="txtBox">
+										</div>
+										
+									</div>
+								</li>
+								<li>
+									<a class="icons" href="javascript:;"><img src="../images/fb-logo-plain.png"></a>
+								</li>
+								<li>
+									<a class="icons" href="javascript:;"><img src="../images/twitter-logo-plain.png"></a>
+								</li>
+								<li>
+									<a class="icons" href="javascript:;"><img src="../images/insta-logo-plain.png"></a>
+								</li>
+								<li>
+									<a class="icons" href="javascript:;"><img src="../images/youtube-logo-plain.png"></a>
+								</li>
+								<li>
+									<a class="icons" href="javascript:;"><img src="../images/gplus-logo-plain.png"></a>
+								</li>
+								<li>
+									<a class="icons" href="javascript:;"><img src="../images/rss-logo-plain.png"></a>
+								</li>
+							</ul>
+						</div>
+                        <div class="clear"></div>
+					</div>
+				</header>
+				<div class="mobileViewHeader">
+					<div class="mobileSiteLogo"><a href="javascript:;"><img src="../images/mobile-site-logo.png"></a></div>
+					<div class="searchArea">
+						<a class="icons searchIcon" href="javascript:;">
+							<i class="mdi-action-search search"></i>
+							<i class="mdi-navigation-close searchCross" style="display:none"></i>
+						</a>
+						<input placeholder="SEARCH" name="user_id" id="userId" type="text" class="txtBox">
+					</div>
+				</div>
+			</div>
+			<div class="contentWrap contentSlide">
+				<div class="pageBanner searchResult">
+					<div class="searchBox">
+                    	<input type="text" placeholder="Search">
+                    </div>
+                    <div class="contentSortWrap">
+                    	<div class="searchContentType">
+                        	<ul>
+                            	<li>Content By:</li>
+                            	<li>
+                                	<input name="group1" type="radio" id="test1" class="with-gap" />
+                                    <label for="test1">videos</label>
+                                </li>
+                                <li>
+                                	<input name="group1" type="radio" id="test2" class="with-gap" />
+                                    <label for="test2">listicle</label>
+                                </li>
+                                <li>
+                                	<input name="group1" type="radio" id="test3" class="with-gap" />
+                                    <label for="test3">photo essay</label>
+                                </li>
+                                <li>
+                                	<input name="group1" type="radio" id="test1" class="with-gap" />
+                                    <label for="test1">podcast</label>
+                                </li>
+                                <li>
+                                	<input name="group1" type="radio" id="test2" class="with-gap" />
+                                    <label for="test2">series</label>
+                                </li>
+                                <li>
+                                	<input name="group1" type="radio" id="test3" class="with-gap" />
+                                    <label for="test3">blog</label>
+                                </li>
+                                <li>
+                                	<input name="group1" type="radio" id="test1" class="with-gap" />
+                                    <label for="test1">all</label>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="searchRelevanceType">
+                        	<ul>
+                            	<li>Sort By:</li>
+                            	<li>
+                                	<div class="selectBox">
+                                    <select class="browser-default">
+                                        <option value="0" selected>Relevance</option>
+                                        <option value="1">Most Viewed</option>
+                                        <option value="2">Most Recent</option>
+                                    </select><div class="pink-arrow">&#9660;</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+				</div>
+				<div class="listContent">
+					<div class="masonryContent">
+				    	<div class="item">
+				        	<div class="dataContainer">
+				                <div class="imageContent">
+					            	<div class="metaDate"><span>Feb 22, 2015</span></div>
+					                <div class="categoryVal funny">Funny</div>
+				                	<a class="detailLink" href="javascript:void(1);">
+				                        <img class="imgpost" src="../images/sample-img.jpg" />
+				                    </a>
+				                        <div class="iconWrap">
+				                            <span class="play"></span><span class="time">05:05</span>
+				                        </div>
+				                </div>
+				                <div class="summary">
+				                	<h2>This man would rather date his balance sheet than a woman.</h2>
+				                    <p>If you're stuck with one of these, you might wish you were single.
+				                    </p>
+				                </div>
+				                <div class="clear"></div>
+				            </div>
+				        </div>
+				        <div class="item">
+				        	<div class="dataContainer">
+				                <div class="imageContent">
+				            	<div class="metaDate"><span>Feb 22, 2015</span></div>
+				                <div class="categoryVal loveSex">Love & Sex</div>
+				                	<a class="detailLink" href="javascript:void(1);">
+				                        <img class="imgpost" src="../images/sample-img2.jpg" />
+				                    </a>
+				                        <div class="iconWrap">
+				                            <span class="read"></span><span class="time">05:05</span>
+				                        </div>
+				                </div>
+				                <div class="summary">
+				                	<h2>Tinder</h2>
+				                    <p>Sheltered 22 year old from Mumbai can be found in some laboratory or the other. Avoids prolonged eye contact, loves cake. Wears glasses so even when she makes eye contact you don't know.
+				                    </p>
+				                </div>
+				                <div class="clear"></div>
+				            </div>
+				        </div>
+				        <div class="item">
+				        	<div class="dataContainer">
+				                <div class="imageContent">
+				            	<div class="metaDate"><span>Feb 22, 2015</span></div>
+				                <div class="categoryVal travelFood">Travel and Food</div>
+				                	<a class="detailLink" href="javascript:void(1);">
+				                        <img class="imgpost" src="../images/sample-img3.jpg" />
+				                    </a>
+				                        <div class="iconWrap">
+				                            <span class="play"></span><span class="time">05:05</span>
+				                        </div>
+				                </div>
+				                <div class="summary">
+				                	<h2>Khosgoes wine tasting</h2>
+				                    <p>I asked God for help. He gave me free wine. "Anything that is free or complimentary will, and should be accepted. Gracefully. Of course.  Unless it is yellow dal." - Khos
+				                    </p>
+				                </div>
+				                <div class="clear"></div>
+				            </div>
+				        </div>
+				        <div class="item">
+				        	<div class="dataContainer">
+				                <div class="imageContent">
+				            	<div class="metaDate"><span>Feb 22, 2015</span></div>
+				                <div class="categoryVal people">People</div>
+				                    <a class="detailLink" href="javascript:void(1);">
+				                        <img class="imgpost" src="../images/sample-img4.jpg" />
+				                    </a>
+				                        <div class="iconWrap">
+				                            <span class="play"></span><span class="time">05:05</span>
+				                        </div>
+				                </div>
+				                <div class="summary">
+				                	<h2>Pop singer who is also a cop</h2>
+				                    <p>The Mumbai Police get a lot of bad press. But there’s another side to their story. Meet Inspector Mahesh Niwatkar - a crime fighter by day and something very different by night. Watch closely
+				                    </p>
+				                </div>
+				                <div class="clear"></div>
+				            </div>
+				        </div>
+				        <div class="item">
+				        	<div class="dataContainer">
+				                <div class="imageContent">
+				            	<div class="metaDate"><span>Feb 22, 2015</span></div>
+				                <div class="categoryVal funny">Funny</div>
+				                	<a class="detailLink" href="javascript:void(1);">
+				                        <img class="imgpost" src="../images/sample-img5.jpg" />
+				                    </a>
+				                        <div class="iconWrap">
+				                            <span class="play"></span><span class="time">05:05</span>
+				                        </div>
+				                </div>
+				                <div class="summary">
+				                	<h2>His hormones are raging!</h2>
+				                    <p>Ladies please speak to him before he sweats himself to death.... 
+				                    </p>
+				                </div>
+				                <div class="clear"></div>
+				            </div>
+				        </div>
+				        <div class="item">
+				        	<div class="dataContainer">
+				                <div class="imageContent">
+				            	<div class="metaDate"><span>Feb 22, 2015</span></div>
+				                <div class="categoryVal loveSex">Love & Sex</div>
+				                    <a class="detailLink" href="javascript:void(1);">
+				                        <img class="imgpost" src="../images/sample-img6.jpg" />
+				                    </a>
+				                        <div class="iconWrap">
+				                            <span class="play"></span><span class="time">05:05</span>
+				                        </div>
+				                </div>
+				                <div class="summary">
+				                	<h2>Getting intimate with Sushant Divgikar, Mr Gay India Part 1</h2>
+				                    <p>We caught up with Sushant a few hours before he left for the Mr Gay World pagent in Rome. Go Diva go!
+				                    </p>
+				                </div>
+				                <div class="clear"></div>
+				            </div>
+				        </div>
+				        <div class="item">
+				        	<div class="dataContainer">
+				                <div class="imageContent">
+				            	<div class="metaDate"><span>Feb 22, 2015</span></div>
+				                <div class="categoryVal funny">Funny</div>
+				                <a class="detailLink" href="javascript:void(1);">
+				                        <img class="imgpost" src="../images/sample-img.jpg" />
+				                </a>
+				                    <div class="iconWrap">
+				                    	<span class="play"></span><span class="time">05:05</span>
+				                    </div>
+				                </div>
+				                <div class="summary">
+				                	<h2>This man would rather date his balance sheet than a woman.</h2>
+				                    <p>If you're stuck with one of these, you might wish you were single.
+				                    </p>
+				                </div>
+				                <div class="clear"></div>
+				            </div>
+				        </div>
+				        <div class="item">
+				        	<div class="dataContainer">
+				                <div class="imageContent">
+				            	<div class="metaDate"><span>Feb 22, 2015</span></div>
+				                <div class="categoryVal loveSex">Love & Sex</div>
+				                    <a class="detailLink" href="javascript:void(1);">
+				                        <img class="imgpost" src="../images/sample-img2.jpg" />
+				                    </a>
+				                        <div class="iconWrap">
+				                            <span class="play"></span><span class="time">05:05</span>
+				                        </div>
+				                </div>
+				                <div class="summary">
+				                	<h2>Tinder</h2>
+				                    <p>Sheltered 22 year old from Mumbai can be found in some laboratory or the other. Avoids prolonged eye contact, loves cake. Wears glasses so even when she makes eye contact you don't know.
+				                    </p>
+				                </div>
+				                <div class="clear"></div>
+				            </div>
+				        </div>
+				        <div class="item">
+				        	<div class="dataContainer">
+				                <div class="imageContent">
+				            	<div class="metaDate"><span>Feb 22, 2015</span></div>
+				                <div class="categoryVal travelFood">Travel and Food</div>
+				                    <a class="detailLink" href="javascript:void(1);">
+				                        <img class="imgpost" src="../images/sample-img3.jpg" />
+				                    </a>
+				                        <div class="iconWrap">
+				                            <span class="play"></span><span class="time">05:05</span>
+				                        </div>
+				                </div>
+				                <div class="summary">
+				                	<h2>Khosgoes wine tasting</h2>
+				                    <p>I asked God for help. He gave me free wine. "Anything that is free or complimentary will, and should be accepted. Gracefully. Of course.  Unless it is yellow dal." - Khos
+				                    </p>
+				                </div>
+				                <div class="clear"></div>
+				            </div>
+				        </div>
+				        <div class="item">
+				        	<div class="dataContainer">
+				                <div class="imageContent">
+				            	<div class="metaDate"><span>Feb 22, 2015</span></div>
+				                <div class="categoryVal people">People</div>
+				                    <a class="detailLink" href="javascript:void(1);">
+				                        <img class="imgpost" src="../images/sample-img4.jpg" />
+				                    </a>
+				                        <div class="iconWrap">
+				                            <span class="play"></span><span class="time">05:05</span>
+				                        </div>
+				                </div>
+				                <div class="summary">
+				                	<h2>Pop singer who is also a cop</h2>
+				                    <p>The Mumbai Police get a lot of bad press. But there’s another side to their story. Meet Inspector Mahesh Niwatkar - a crime fighter by day and something very different by night. Watch closely
+				                    </p>
+				                </div>
+				                <div class="clear"></div>
+				            </div>
+				        </div>
+				        <div class="item">
+				        	<div class="dataContainer">
+				                <div class="imageContent">
+				            	<div class="metaDate"><span>Feb 22, 2015</span></div>
+				                <div class="categoryVal funny">Funny</div>
+				                    <a class="detailLink" href="javascript:void(1);">
+				                        <img class="imgpost" src="../images/sample-img5.jpg" />
+				                    </a>
+				                        <div class="iconWrap">
+				                            <span class="play"></span><span class="time">05:05</span>
+				                        </div>
+				                </div>
+				                <div class="summary">
+				                	<h2>His hormones are raging!</h2>
+				                    <p>Ladies please speak to him before he sweats himself to death.... 
+				                    </p>
+				                </div>
+				                <div class="clear"></div>
+				            </div>
+				        </div>
+				        <div class="item">
+				        	<div class="dataContainer">
+				                <div class="imageContent">
+				            	<div class="metaDate"><span>Feb 22, 2015</span></div>
+				                <div class="categoryVal loveSex">Love & Sex</div>
+				                    <a class="detailLink" href="javascript:void(1);">
+				                        <img class="imgpost" src="../images/sample-img6.jpg" />
+				                    </a>
+				                        <div class="iconWrap">
+				                            <img class="play" src="../images/video-play-icon.png" /><span>06:00</span>
+				                        </div>
+				                </div>
+				                <div class="summary">
+				                	<h2>Getting intimate with Sushant Divgikar, Mr Gay India Part 1</h2>
+				                    <p>We caught up with Sushant a few hours before he left for the Mr Gay World pagent in Rome. Go Diva go!
+				                    </p>
+				                </div>
+				                <div class="clear"></div>
+				            </div>
+				        </div>
+				    </div>
+                    <div class="loader"></div>
+				</div>
+			</div>
+			<div class="colRhs">
+				<!-- empty column -->
+			</div>
+			<div class="clear"></div>
+		</div>
+        <div class="clear"></div>
+		<!-- containerwrap ends -->
+	</div>
+    <footer>
+	    	<div class="footerContent">
+	            <ul>
+	                <li><a href="javascript:void(1);">ABOUT US</a></li>
+	                <li><a href="javascript:void(1);">CONTACT US</a></li>
+	                <li><a href="javascript:void(1);">TERMS</a></li>
+	                <li><a href="javascript:void(1);">PRIVACY</a></li>
+	                <li><a href="javascript:void(1);">NEWSLETTER</a></li>
+	                <li><a href="javascript:void(1);">&copy; 101 INDIA DIGITAL PVT.LTD</a></li>
+	                <li><a href="javascript:void(1);">ALL RIGHTS RESERVED</a></li>
+	            </ul>
+	        </div>
+	    </footer>
+</body>
+</html>

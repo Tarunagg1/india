@@ -1,0 +1,367 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>101 Media</title>
+<meta name="viewport" content="width=device-width" >
+<link type="text/css" href="../css/global.css" rel="stylesheet" />
+<script src="../scripts/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="../scripts/masonry.pkgd.min.js"></script>
+<script type="text/javascript" src="../scripts/owl.carousel.min.js"></script>
+<script type="text/javascript" src="../scripts/imagesloaded.min.js"></script>
+<script type="text/javascript" src="../scripts/jquery.jscrollpane.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/owl.carousel.css">
+<link rel="stylesheet" type="text/css" href="../css/owl.theme.css">
+<link rel="stylesheet" type="text/css" href="../css/owl.transitions.css">
+<link rel="stylesheet" type="text/css" href="../css/jquery.jscrollpane.custom.css">
+
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+     menuContent();
+     scollmenu();
+      closebtn();
+ initBlockLayout();
+ // initMasonry();
+     titleBar();
+});	
+
+function menuContent(){
+    $('.menuOption6').click(function() { 
+           $('.menuContentWrapper').toggleClass('slide');
+           $('.homeContent').toggleClass('slidehomeContent');
+           $('#nav-toggle').addClass('active');
+           $('.tooltip').removeClass('onHover');
+           $('.tooltipText').removeClass('textOnHover');
+           $('.lhsFixed').hide();
+           $('.menuOption5').fadeOut(100);
+           $('.menuOption6').fadeOut(100);
+           $('.lhsFixed.expandedOptions').fadeIn();
+           $('.logo').addClass('logoScale');
+           $('.menuWrapper').addClass('menuWrapperExpand');
+        });
+}
+	
+    function scollmenu(){
+           $('.slideOptionsWrapper').jScrollPane({
+            autoReinitialise: true,
+            hideFocus: true
+        });
+    }
+	
+    function initBlockLayout(){
+        $("#owl-example").owlCarousel({
+        slideSpeed : 300,
+        autoPlay : false,
+        items:2,
+        pagination:true,
+        stopOnHover : true,
+        itemsDesktop: false,
+        itemsMobile : [768,1]
+
+        });
+    }
+
+
+function initMasonry(){
+	var $container = $('#masonry');
+	$container.masonry({
+		itemSelector: '.itemWrap',
+		//columnWidth:  $container.width() / 3,
+		gutter:0,
+	}).imagesLoaded(function(){
+		$container.masonry('reloadItems')
+	});		
+}
+
+ function closebtn(){
+        $('#nav-toggle').click(function(){
+            $('.menuContentWrapper').removeClass('slide');
+            $('.homeContent').removeClass('slidehomeContent');
+            $(this).removeClass('active');
+            $('.tooltip').addClass('onHover');
+            $('.tooltipText').addClass('textOnHover');
+            $('.lhsFixed').show();
+            $('.menuOption5').delay(500).fadeIn();
+           $('.menuOption6').delay(500).fadeIn();
+           $('.logo').removeClass('logoScale');
+            $('.menuWrapper').removeClass('menuWrapperExpand');
+        });
+    }
+
+function titleBar(){
+	
+	$(window).on("scroll", function(){
+		var $titlebar = $('.titleBar');
+				var $title = $('.postDetailContent .title');
+                var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+				if (scrollTop > $title.offset().top+200) {
+					 $titlebar.fadeIn("fast");
+					 console.log("titlebar show");
+			    }
+				else{
+					$titlebar.fadeOut("fast");
+					 console.log("titlebar hide");
+				}
+	});
+
+}
+
+</script>
+</head>
+<body>
+<div class="page">
+     <div class="menuWrapper">
+            <div class="logoWrapper">
+                <div class="logo">
+                    <img src="../images/101india-logo.png" />
+                </div>
+            </div>
+             
+        
+            <div class="lhsFixed">
+                <div class="sideOptions menuoptions">
+                    <ul>
+                        <li>
+                            <a class="tooltip menuOption1 onHover" href="javascript:;"><span class="tooltipText textOnHover">WET PAINT</span></a>
+                        </li>
+                        <li>
+                            <a class="tooltip menuOption2 onHover" href="javascript:;"><span class="tooltipText textOnHover">EPIC SHIT</span></a>
+                        </li>
+                        <li><a class="tooltip menuOption3 onHover" href="javascript:;"><span class="tooltipText textOnHover">SEEN MOST</span></a>
+                        </li>
+                        <li><a class="tooltip menuOption4 onHover" href="javascript:;"><span class="tooltipText textOnHover">101s</span></a>
+                        </li>
+                        <li><a class="tooltip menuOption5 onHover" href="javascript:;"><span class="tooltipText textOnHover">SEARCH</span></a>
+                        </li>
+                        <li><a class="tooltip menuOption6 onHover" href="javascript:;"><span class="tooltipText textOnHover">More</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <div class="menuContentWrapper expandMenu">
+                <div class="lhsFixed expandedOptions">
+                     <a id="nav-toggle" href="javascript:;"><span></span></a>
+                    <div class="slideOptionsWrapper">
+                        <div class="sideOptions menuoptions">
+                            <ul>
+                                <li>
+                                    <a class="tooltip menuOption1 onHover" href="javascript:;"><span class="tooltipText textOnHover">WET PAINT</span></a>
+                                </li>
+                                <li>
+                                    <a class="tooltip menuOption2 onHover" href="javascript:;"><span class="tooltipText textOnHover">EPIC SHIT</span></a>
+                                </li>
+                                <li><a class="tooltip menuOption3 onHover" href="javascript:;"><span class="tooltipText textOnHover">SEEN MOST</span></a>
+                                </li>
+                                <li><a class="tooltip menuOption4 onHover" href="javascript:;"><span class="tooltipText textOnHover">101s</span></a>
+                                </li>
+                                <li><a class="tooltip menuOption5 onHover" href="javascript:;"><span class="tooltipText textOnHover">SEARCH</span></a>
+                                </li>
+                                <li><a class="tooltip menuOption6 onHover" href="javascript:;"><span class="tooltipText textOnHover">More</span></a>
+                                </li>
+                            </ul>
+                            <div class="bottomMenu">
+                                <div class="searchContent">
+                                      <input type="text" class="searchBox" size="21" maxlength="120" placeholder="SEARCH"><input type="submit" value=" " class="searchBtn">
+                                </div>
+                                <ul>
+                                    <li><span class="tooltipText">LOGIN</span></li>
+                                    <li><span class="tooltipText">SIGNUP</span> </li>
+                                    <li><span class="tooltipText">ABOUT US</span></li>
+                                    <li><span class="tooltipText">CONTACT</span></li>
+                                    <li><span class="tooltipText">PRIVACY POLICY</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+       </div>
+    <div class="mainContent">
+           <div class="floatingControl">
+               <ul>
+                   <li class="next"><a href="javascript:;"><span>next</span></a></li>
+                   <li class="previous"><a href="javascript:;javascript:;"><span>previous</span></a></li>
+                   <li class="cancel"><a href="javascript:;"><span>cancel</span></a></li>
+               </ul>
+           </div>
+       
+        <section class="detailContent">
+          <div class="titleBar" style="display:none;">
+                            <div class="titleBarWrap">
+                            <div class="titleBarLhs">
+                                 <div class="title">5 Bollywood Films That Beautifully Portray The True Strength Of A Woman</div>
+                                 <div class="postMeta">
+                                    <span class="date">23rd Sept, 2014</span> | <span class="tag"> Travel </span>
+                                 </div>
+                            </div> 
+                            
+                            <div class="titleBarRhs">
+                                <div class="postInfo">
+                                     <div class="postButton">
+                                        <span class="button">
+                                            <a href="javascript:;" class="fb">facebook</a>
+                                        </span>
+                                        <span class="button">
+                                            <a href="javascript:;" class="tw">twitter</a>
+                                        </span>
+                                        <span class="button">
+                                            <a href="javascript:;" class="gplus">gplus</a>
+                                        </span>
+                                        <span class="button">
+                                            <a href="javascript:;" class="mail">email</a>
+                                        </span>
+                                    </div>
+                                
+                             </div>
+                            </div>
+                            </div>
+                         </div>
+              <div class="postDetail">
+                  <div class="coverImage">
+                        <img src="../images/cover-post-image.jpg" />
+                  </div>
+                  <div class="postDetailContent">
+                    <div class="content">
+                       
+                        <h1 class="title">5 Bollywood Films That Beautifully Portray The True Strength Of A Woman</h1>
+                        <div class="summary">
+                            <p>Bollywood movies are not all song and dance when it comes to the portrayal of women. In the midst of directors who still consider actresses as mannequins and item girls to increase Box Office ratings, there are a select few who believe in meaningful cinema.
+ and have successfully rolled out marvels which show women in powerful roles. Here are 18 such movies which celebrate being a women and must be on your to-watch list: </p>
+                        </div>
+                        <div class="postInfo">
+                            <div class="postButton">
+                                <span class="button">
+                                    <a href="javascript:;" class="fb">facebook</a>
+                                </span>
+                                <span class="button">
+                                    <a href="javascript:;" class="tw">twitter</a>
+                                </span>
+                                <span class="button">
+                                    <a href="javascript:;" class="gplus">gplus</a>
+                                </span>
+                                <span class="button">
+                                    <a href="javascript:;" class="mail">email</a>
+                                </span>
+                            </div>
+                            <div class="postMeta">
+                                <span class="date">23rd Sept, 2014</span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="postContent">
+                            <h2>1. Mother India</h2>
+                            <p>Released in 1957, the iconic movie which was also India's Oscar 
+nomination, was way ahead of its time. Playing the role of the perfect mother, Radha does something so exemplary that she ends up becoming a role model for all the women in her village. 
+A cinematic delight, this one is. a must watch! </p>
+                            <p><img src="../images/post-sample-image1.jpg" /></p>
+                            <h2>2. Bandit Queen</h2>
+                            <p>Based on real-life bandit, Phoolan Devi, this film is possibly Shekhar Kapur's most hard-hitting work till date. From being a victim of sexual and physical abuse to leading a gang of men to finally taking her revenge, the storytelling will leave you unsettled. Seema Biswas' 
+commendable portrayal of Phoolan Devi won her a national award for her performance. 
+It is one movie that you will remember for a lifetime. </p>
+                            <p><img src="../images/post-sample-image2.jpg" /></p>
+                            <h2>3. Sahib Bibi Aur Gulam</h2>
+                            <p>Meena Kumari's portrayal of Chhoti Bahu is still considered one of the best performances Bollywood has ever seen. She beautifully brings the role of a suffering wife who takes to alcohol to please her philandering husband on screen. Both a commercial as well as critical success, Kumari pulls off her character to perfection! </p>
+                            <p><img src="../images/post-sample-image3.jpg" /></p>
+                            <h2>4. No One Killed Jessica</h2>
+                            <p>Based on the real life story of model Jessica Lal, the movie showed two strong women characters, who despite being very different from each other, stand together and fight tirelessly for justice. Even though everyone already knew the story, Rani Mukerji and Vidya Balan stole the show with their acting prowess. </p>
+                            <p><img src="../images/post-sample-image4.jpg" /></p>
+                        </div>
+                         
+                    </div>
+                     
+            
+         
+                    <div class="sidebar">
+          <section class="relatedStories wetPaintSection">
+        	<div class="wrapper">
+        	<h2>Related Stories</h2>
+            <div class="wetPaintContent">
+                	<div class="itemWrap">
+                    	<div class="topicImageContainer">
+                        	<img src="../images/konkona-sen.jpg">
+                        </div>
+                        <div class="description">
+                            <div class="topicHeader">
+                                10 Reasons Why Moving To A New City Is An Experience Like No Other
+                            </div>
+                            <div class="topicSummary">
+                                <p>Cricket. A sport everywhere else in the world, but a religion in India. A lot of people play it, a lot more watch it, but every single Indian talks about it... <a class="readMore" href="series-landing.html">Read More</a></p>
+                            </div>
+                            <div class="mediaIconHolder">
+                                <div class="mediaIcon video">
+                                	<img src="../images/video-pink-icon.png">
+                                </div>
+                                <div class="mediaIcon more">
+                                	<img src="../images/read-more-icon-grey-2.png">
+                                </div>
+                                <span>22 Sept. 2014</span>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="itemWrap">
+                    	<div class="topicImageContainer">
+                        	<img src="../images/solid-partnership.jpg">
+                        </div>
+                        <div class="description">
+                            <div class="topicHeader">
+                                21 Things Indians Say While Watching Cricket
+                            </div>
+                            <div class="topicSummary">
+                                <p>Cricket. A sport everywhere else in the world, but a religion in India. A lot of people play it, a lot more watch it, but every single Indian talks about it... <a class="readMore" href="series-landing.html">Read More</a></p>
+                            </div>
+                            <div class="mediaIconHolder">
+                                <div class="mediaIcon video">
+                                	<img src="../images/video-pink-icon.png">
+                                </div>
+                                <div class="mediaIcon more">
+                                	<img src="../images/read-more-icon-grey-2.png">
+                                </div>
+                                <span>22 Sept. 2014</span>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="itemWrap">
+                    	<div class="topicImageContainer">
+                        	<img src="../images/cookies-basket.jpg">
+                        </div>
+                        <div class="description">
+                            <div class="topicHeader">
+                                20 Delectable Dishes From Rajasthan That Will Make You Drool Instantly
+                            </div>
+                            <div class="topicSummary">
+                                <p>Rajasthan, the land of Maharajas, is famous for its rich culture. But what makes the state distinctive and popular is its cuisine... <a class="readMore" href="series-landing.html">Read More</a></p>
+                            </div>
+                            <div class="mediaIconHolder">
+                                <div class="mediaIcon text">
+                                	<img src="../images/text-doc-icon.png">
+                                </div>
+                                <div class="mediaIcon more">
+                                	<img src="../images/read-more-icon-grey-2.png">
+                                </div>
+                                <span>22 Sept. 2014</span>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <div class="clear"></div>
+        	</div>
+        </section>
+                    </div>
+                    <div class="clear"></div>
+                  </div>
+              </div>
+        </section>
+        
+        
+      
+    </div>
+</div>
+</body>
+</html>
